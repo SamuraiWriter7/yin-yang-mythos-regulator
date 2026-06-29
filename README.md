@@ -1,6 +1,6 @@
 # Yin-Yang Mythos Regulator
 
-**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, verification, human review, and traceable records.
+**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, permission control, verification, human review, and traceable records.
 
 It is designed as the structural core of **陰陽ミトス調律丸** — a small regulator model / GPT concept that uses a yin-yang structure to redirect high-capability AI insight toward protection rather than exploitation.
 
@@ -20,6 +20,8 @@ Left unregulated, this capability may drift toward:
 * unclear boundaries
 * missing human review
 * weak auditability
+* unsafe tool use
+* permission overreach
 
 This protocol reframes those tendencies.
 
@@ -29,7 +31,7 @@ Instead of asking:
 
 it asks:
 
-> What must be protected, repaired, verified, recorded, and reviewed?
+> What must be protected, repaired, bounded, verified, recorded, and reviewed?
 
 The goal is not to suppress capability.
 The goal is to regulate capability into defensive structure.
@@ -138,18 +140,58 @@ It converts abstract risk into:
 
 ---
 
+## Agent Permission Boundary
+
+v0.3 introduces the **Agent Permission Boundary**.
+
+This layer ensures that AI agents pass through explicit permission boundaries before tool use, autonomous action, deployment, external testing, or high-impact decisions.
+
+```text
+Capability -> Permission Boundary -> Action
+```
+
+The principle is simple:
+
+> Capability must pass through permission boundaries before action.
+
+This prevents high-capability AI systems from moving directly from insight to execution.
+
+Agent Permission Boundary defines:
+
+* agent profile
+* boundary principle
+* permission scope
+* autonomy control
+* stop conditions
+* review gates
+* trace policy
+* deployment policy
+* human review
+
+It makes the following distinction explicit:
+
+> Capability is not permission.
+> Permission is not deployment.
+> Deployment is not review.
+> Review is not optional.
+
+---
+
 ## Repository Structure
 
 ```text
 .
 ├── schemas/
 │   ├── mythos-regulation-record.schema.json
-│   └── defensive-repair-loop.schema.json
+│   ├── defensive-repair-loop.schema.json
+│   └── agent-permission-boundary.schema.json
 ├── examples/
 │   ├── mythos-regulation-record.example.yaml
-│   └── defensive-repair-loop.example.yaml
+│   ├── defensive-repair-loop.example.yaml
+│   └── agent-permission-boundary.example.yaml
 ├── docs/
-│   └── defensive-repair-loop.md
+│   ├── defensive-repair-loop.md
+│   └── agent-permission-boundary.md
 ├── scripts/
 │   └── validate_examples.py
 ├── .github/
@@ -199,6 +241,22 @@ A loop includes:
 * trace receipt
 * human review gate
 
+### `agent-permission-boundary.schema.json`
+
+Defines the permission boundary layer for AI agents before tool use or autonomous action.
+
+A boundary includes:
+
+* agent profile
+* boundary principle
+* permission scope
+* autonomy control
+* stop conditions
+* review gates
+* trace policy
+* deployment policy
+* human review requirement
+
 ---
 
 ## Examples
@@ -228,6 +286,21 @@ The example focuses on:
 * recording trace receipt
 * routing to human review
 
+### `agent-permission-boundary.example.yaml`
+
+Demonstrates how a defensive repair assistant can be constrained before tool use or action.
+
+The example focuses on:
+
+* documentation-only operation
+* schema validation permission
+* restricted external access
+* prohibited self-permission expansion
+* stop conditions
+* review gates
+* trace receipts
+* deployment restrictions
+
 ---
 
 ## Documentation
@@ -253,6 +326,28 @@ It describes:
 * relationship to v0.1
 * safety boundary
 * example use cases
+
+### `docs/agent-permission-boundary.md`
+
+Explains the v0.3 permission boundary model:
+
+```text
+Capability -> Permission Boundary -> Action
+```
+
+It describes:
+
+* agent profile
+* autonomy levels
+* boundary principle
+* permission scope
+* stop conditions
+* review gates
+* trace policy
+* deployment policy
+* human review
+* boundary check flow
+* relationship to Defensive Repair Loop
 
 ---
 
@@ -281,6 +376,10 @@ Expected output:
   schema : schemas/defensive-repair-loop.schema.json
   example: examples/defensive-repair-loop.example.yaml
 [ok] defensive-repair-loop.example.yaml is valid
+[validate] Agent Permission Boundary
+  schema : schemas/agent-permission-boundary.schema.json
+  example: examples/agent-permission-boundary.example.yaml
+[ok] agent-permission-boundary.example.yaml is valid
 ```
 
 ---
@@ -317,6 +416,8 @@ It is intended for:
 * stop-condition design
 * repair-first AI regulation
 * human-review gate design
+* least-privilege planning
+* deployment readiness review
 
 It is not intended for:
 
@@ -328,8 +429,9 @@ It is not intended for:
 * evasion or persistence
 * real-target attack planning
 * unreviewed deployment
+* self-authorized permission expansion
 
-All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, or review.
+All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, permission control, or review.
 
 ---
 
@@ -367,20 +469,35 @@ It establishes:
 * residual risk records
 * mandatory human review gate
 
-v0.1 defines the furnace.
-v0.2 adds circulation.
+### v0.3 — Agent Permission Boundary
+
+v0.3 adds a permission boundary before agent action.
+
+It establishes:
+
+* agent profile
+* boundary principle
+* permission scope
+* autonomy control
+* stop conditions
+* review gates
+* trace policy
+* deployment policy
+* mandatory human review
+
+In short:
+
+> v0.1 defines the furnace.
+> v0.2 adds circulation.
+> v0.3 draws the boundary before the fire moves.
 
 ---
 
 ## Roadmap
 
-### v0.3 — Agent Permission Boundary
-
-Add a schema for reviewing AI agent tool permissions, autonomy level, stop conditions, and escalation gates.
-
 ### v0.4 — Trace Receipt Bridge
 
-Connect Mythos Regulation Records and Defensive Repair Loops with external trace / receipt systems.
+Connect Mythos Regulation Records, Defensive Repair Loops, and Agent Permission Boundaries with external trace / receipt systems.
 
 ### v0.5 — Multi-Wing Defensive Orchestration
 
@@ -390,6 +507,7 @@ Extend the model into a multi-wing defensive architecture:
 * Analyst Wing
 * Repair Wing
 * Verifier Wing
+* Boundary Wing
 * Human Gate
 * Trace Core
 
@@ -403,13 +521,14 @@ It changes the center of gravity.
 
 ```text
 from: How can this be exploited?
-to:   What must be protected, repaired, verified, recorded, and reviewed?
+to:   What must be protected, repaired, bounded, verified, recorded, and reviewed?
 ```
 
 The model is simple:
 
 > Observe with Yang.
 > Repair with Yin.
+> Bound before action.
 > Record with Kazene.
 > Review before deployment.
 
@@ -426,4 +545,5 @@ Recommended options:
 * CC BY 4.0 for documentation-oriented use
 
 Choose the license that best fits the intended repository governance.
+
 
