@@ -2,10 +2,13 @@
 """
 Validate Yin-Yang Mythos Regulator examples against JSON Schemas.
 
-v0.1 validates:
+Validated targets:
 
 * schemas/mythos-regulation-record.schema.json
 * examples/mythos-regulation-record.example.yaml
+
+* schemas/defensive-repair-loop.schema.json
+* examples/defensive-repair-loop.example.yaml
 """
 
 from __future__ import annotations
@@ -25,7 +28,12 @@ VALIDATION_TARGETS = [
         "name": "Mythos Regulation Record",
         "schema": ROOT / "schemas" / "mythos-regulation-record.schema.json",
         "example": ROOT / "examples" / "mythos-regulation-record.example.yaml",
-    }
+    },
+    {
+        "name": "Defensive Repair Loop",
+        "schema": ROOT / "schemas" / "defensive-repair-loop.schema.json",
+        "example": ROOT / "examples" / "defensive-repair-loop.example.yaml",
+    },
 ]
 
 
@@ -96,4 +104,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
 
