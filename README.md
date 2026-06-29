@@ -1,6 +1,6 @@
 # Yin-Yang Mythos Regulator
 
-**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, permission control, verification, human review, external trace export, and reviewable records.
+**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, permission control, verification, human review, external trace export, multi-wing orchestration, and reviewable records.
 
 It is designed as the structural core of **陰陽ミトス調律丸** — a small regulator model / GPT concept that uses a yin-yang structure to redirect high-capability AI insight toward protection rather than exploitation.
 
@@ -10,7 +10,7 @@ It is designed as the structural core of **陰陽ミトス調律丸** — a smal
 
 ## Concept
 
-High-capability AI systems can identify structural weaknesses, risky assumptions, permission gaps, missing stop conditions, and traceability failures.
+High-capability AI systems can identify structural weaknesses, risky assumptions, permission gaps, missing stop conditions, traceability failures, and unsafe coordination paths.
 
 Left unregulated, this capability may drift toward:
 
@@ -23,6 +23,7 @@ Left unregulated, this capability may drift toward:
 * unsafe tool use
 * permission overreach
 * invisible internal decisions
+* single-agent completion without review
 
 This protocol reframes those tendencies.
 
@@ -32,7 +33,7 @@ Instead of asking:
 
 it asks:
 
-> What must be protected, repaired, bounded, verified, recorded, reviewed, and safely exported?
+> What must be protected, repaired, bounded, verified, recorded, reviewed, safely exported, and safely orchestrated?
 
 The goal is not to suppress capability.
 The goal is to regulate capability into defensive structure.
@@ -41,7 +42,7 @@ The goal is to regulate capability into defensive structure.
 
 ## Core Model
 
-Yin-Yang Mythos Regulator consists of three layers.
+Yin-Yang Mythos Regulator consists of three foundational layers.
 
 ```text
 Yang Wing   -> Abstract vulnerability observation
@@ -106,6 +107,7 @@ It records:
 * residual risks
 * human review requirements
 * external trace export requirements
+* multi-wing orchestration receipts
 
 Kazene Core ensures that the system does not merely generate advice, but leaves a reviewable trace.
 
@@ -212,12 +214,43 @@ It defines:
 
 It ensures that defensive regulation does not remain invisible inside the system that produced it.
 
+---
+
+## Multi-Wing Defensive Orchestration
+
+v0.5 introduces **Multi-Wing Defensive Orchestration**.
+
+This layer coordinates defensive AI regulation across multiple specialized wings so that no single wing can complete the loop alone.
+
+```text
+Finder -> Analyst -> Repair -> Verifier -> Boundary -> Bridge -> Human Gate -> Trace Core
+```
+
+The principle is:
+
+> No wing may complete the loop alone.
+
+Multi-Wing Defensive Orchestration separates responsibility across specialized wings:
+
+* Finder Wing: abstract risk finding
+* Analyst Wing: boundary and impact analysis
+* Repair Wing: defensive repair generation
+* Verifier Wing: repair verification
+* Boundary Wing: permission boundary review
+* Bridge Wing: trace receipt export preparation
+* Human Gate: human review
+* Trace Core: orchestration trace
+
+It prevents a single model, agent, or subsystem from moving directly from risk discovery to action, deployment, export, or completion.
+
 In short:
 
 > Regulate internally.
+> Repair through circulation.
 > Bound before action.
 > Export only as safe trace.
-> Review before synchronization.
+> Orchestrate through multiple wings.
+> Review before completion.
 
 ---
 
@@ -229,16 +262,19 @@ In short:
 │   ├── mythos-regulation-record.schema.json
 │   ├── defensive-repair-loop.schema.json
 │   ├── agent-permission-boundary.schema.json
-│   └── trace-receipt-bridge.schema.json
+│   ├── trace-receipt-bridge.schema.json
+│   └── multi-wing-defensive-orchestration.schema.json
 ├── examples/
 │   ├── mythos-regulation-record.example.yaml
 │   ├── defensive-repair-loop.example.yaml
 │   ├── agent-permission-boundary.example.yaml
-│   └── trace-receipt-bridge.example.yaml
+│   ├── trace-receipt-bridge.example.yaml
+│   └── multi-wing-defensive-orchestration.example.yaml
 ├── docs/
 │   ├── defensive-repair-loop.md
 │   ├── agent-permission-boundary.md
-│   └── trace-receipt-bridge.md
+│   ├── trace-receipt-bridge.md
+│   └── multi-wing-defensive-orchestration.md
 ├── scripts/
 │   └── validate_examples.py
 ├── .github/
@@ -323,6 +359,26 @@ A bridge includes:
 * safety boundary
 * human review requirement
 
+### `multi-wing-defensive-orchestration.schema.json`
+
+Defines the multi-wing defensive orchestration layer.
+
+An orchestration includes:
+
+* source records
+* orchestration policy
+* wing definitions
+* handoff rules
+* blocking conditions
+* orchestration receipt
+* wing outputs
+* handoff chain
+* review decision
+* residual risks
+* final status
+* safety boundary
+* human review requirement
+
 ---
 
 ## Examples
@@ -382,6 +438,22 @@ The example focuses on:
 * integrity policy
 * safety boundary
 * human review before external export
+
+### `multi-wing-defensive-orchestration.example.yaml`
+
+Demonstrates how defensive regulation can be coordinated across multiple specialized wings.
+
+The example focuses on:
+
+* abstract risk finding
+* boundary and impact analysis
+* defensive repair generation
+* repair verification
+* permission boundary review
+* trace receipt export preparation
+* human review
+* orchestration trace
+* no single wing completion
 
 ---
 
@@ -455,6 +527,29 @@ It describes:
 * human review
 * external receipt compatibility
 
+### `docs/multi-wing-defensive-orchestration.md`
+
+Explains the v0.5 multi-wing orchestration model:
+
+```text
+Finder -> Analyst -> Repair -> Verifier -> Boundary -> Bridge -> Human Gate -> Trace Core
+```
+
+It describes:
+
+* orchestration policy
+* wing model
+* wing roles
+* handoff rules
+* blocking conditions
+* required actions
+* orchestration receipt
+* wing outputs
+* handoff chain
+* review decision
+* safety boundary
+* human review
+
 ---
 
 ## Validation
@@ -490,6 +585,10 @@ Expected output:
   schema : schemas/trace-receipt-bridge.schema.json
   example: examples/trace-receipt-bridge.example.yaml
 [ok] trace-receipt-bridge.example.yaml is valid
+[validate] Multi-Wing Defensive Orchestration
+  schema : schemas/multi-wing-defensive-orchestration.schema.json
+  example: examples/multi-wing-defensive-orchestration.example.yaml
+[ok] multi-wing-defensive-orchestration.example.yaml is valid
 ```
 
 ---
@@ -529,6 +628,7 @@ It is intended for:
 * least-privilege planning
 * deployment readiness review
 * safe external trace export
+* multi-wing defensive orchestration
 
 It is not intended for:
 
@@ -543,8 +643,10 @@ It is not intended for:
 * self-authorized permission expansion
 * unsafe external publication
 * leaking sensitive secret values
+* bypassing review gates
+* suppressing trace records
 
-All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, permission control, review, or safe receipt export.
+All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, permission control, review, safe receipt export, or multi-wing defensive orchestration.
 
 ---
 
@@ -616,21 +718,13 @@ It establishes:
 * safety boundary
 * human review before external export
 
-In short:
-
-> v0.1 defines the furnace.
-> v0.2 adds circulation.
-> v0.3 draws the boundary before the fire moves.
-> v0.4 exports the regulated fire as traceable receipt.
-
----
-
-## Roadmap
-
 ### v0.5 — Multi-Wing Defensive Orchestration
 
-Extend the model into a multi-wing defensive architecture:
+v0.5 adds a multi-wing defensive coordination layer.
 
+It establishes:
+
+* orchestration policy
 * Finder Wing
 * Analyst Wing
 * Repair Wing
@@ -639,8 +733,26 @@ Extend the model into a multi-wing defensive architecture:
 * Bridge Wing
 * Human Gate
 * Trace Core
+* handoff rules
+* blocking conditions
+* orchestration receipt
+* no single wing completion
 
-### Future Direction
+In short:
+
+> v0.1 defines the furnace.
+> v0.2 adds circulation.
+> v0.3 draws the boundary before the fire moves.
+> v0.4 exports the regulated fire as traceable receipt.
+> v0.5 prevents any single wing from completing the loop alone.
+
+---
+
+## Roadmap
+
+### v0.6 and Beyond
+
+The first arc is complete at v0.5.
 
 Potential future layers may include:
 
@@ -649,6 +761,12 @@ Potential future layers may include:
 * multi-agent review flows
 * cross-protocol synchronization examples
 * defensive governance templates
+* runtime adapter examples
+* MCP bridge profiles
+* formal policy bundles
+* release-to-release compatibility notes
+
+A future continuation may be developed in a separate repository if the protocol expands beyond the first arc.
 
 ---
 
@@ -660,7 +778,7 @@ It changes the center of gravity.
 
 ```text
 from: How can this be exploited?
-to:   What must be protected, repaired, bounded, verified, recorded, reviewed, and safely exported?
+to:   What must be protected, repaired, bounded, verified, recorded, reviewed, safely exported, and safely orchestrated?
 ```
 
 The model is simple:
@@ -670,7 +788,8 @@ The model is simple:
 > Bound before action.
 > Record with Kazene.
 > Export only as safe trace.
-> Review before synchronization.
+> Orchestrate through multiple wings.
+> Let no wing complete the loop alone.
 
 ---
 
@@ -685,4 +804,5 @@ Recommended options:
 * CC BY 4.0 for documentation-oriented use
 
 Choose the license that best fits the intended repository governance.
+
 
