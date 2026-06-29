@@ -50,32 +50,32 @@ permission_scope:
         - "record residual risk"
       max_environment: "documentation_only"
 
-restricted_tools:
-  - tool_name: "external_network_access"
-    restriction_reason: "External targets may introduce authorization ambiguity and must not be accessed without explicit review."
-    review_required: true
+  restricted_tools:
+    - tool_name: "external_network_access"
+      restriction_reason: "External targets may introduce authorization ambiguity and must not be accessed without explicit review."
+      review_required: true
 
-  - tool_name: "production_deployment"
-    restriction_reason: "Production changes are high-impact and require accountable human review, rollback planning, and trace records."
-    review_required: true
+    - tool_name: "production_deployment"
+      restriction_reason: "Production changes are high-impact and require accountable human review, rollback planning, and trace records."
+      review_required: true
 
   - tool_name: "permission_management"
     restriction_reason: "Permission changes can expand agent capability and must be reviewed before use."
     review_required: true
 
-prohibited_actions:
-  - "self_permission_expansion"
-  - "unauthorized_testing"
-  - "external_target_interaction_without_review"
-  - "production_deployment_without_review"
-  - "irreversible_action_without_review"
-  - "credential_collection"
-  - "malicious_code_generation"
-  - "exploit_execution"
-  - "persistence_or_evasion"
-  - "policy_bypass"
-  - "trace_suppression"
-  - "human_review_bypass"
+  prohibited_actions:
+    - "self_permission_expansion"
+    - "unauthorized_testing"
+    - "external_target_interaction_without_review"
+    - "production_deployment_without_review"
+    - "irreversible_action_without_review"
+    - "credential_collection"
+    - "malicious_code_generation"
+    - "exploit_execution"
+    - "persistence_or_evasion"
+    - "policy_bypass"
+    - "trace_suppression"
+    - "human_review_bypass"
 
 autonomy_control:
   autonomy_level: "review_required"
