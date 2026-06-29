@@ -9,6 +9,9 @@ Validated targets:
 
 * schemas/defensive-repair-loop.schema.json
 * examples/defensive-repair-loop.example.yaml
+
+* schemas/agent-permission-boundary.schema.json
+* examples/agent-permission-boundary.example.yaml
 """
 
 from __future__ import annotations
@@ -33,6 +36,11 @@ VALIDATION_TARGETS = [
         "name": "Defensive Repair Loop",
         "schema": ROOT / "schemas" / "defensive-repair-loop.schema.json",
         "example": ROOT / "examples" / "defensive-repair-loop.example.yaml",
+    },
+    {
+        "name": "Agent Permission Boundary",
+        "schema": ROOT / "schemas" / "agent-permission-boundary.schema.json",
+        "example": ROOT / "examples" / "agent-permission-boundary.example.yaml",
     },
 ]
 
