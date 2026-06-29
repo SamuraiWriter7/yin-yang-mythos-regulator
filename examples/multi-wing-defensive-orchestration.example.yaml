@@ -379,172 +379,172 @@ blocking_conditions:
     blocking: true
 
 orchestration_receipt:
-origin_question: "How can defensive AI regulation be coordinated across multiple wings without allowing any single wing to complete the loop alone?"
-orchestration_summary: "A multi-wing defensive orchestration that separates abstract risk finding, analysis, repair, verification, permission boundary review, trace bridge preparation, human review, and final trace recording."
+  origin_question: "How can defensive AI regulation be coordinated across multiple wings without allowing any single wing to complete the loop alone?"
+  orchestration_summary: "A multi-wing defensive orchestration that separates abstract risk finding, analysis, repair, verification, permission boundary review, trace bridge preparation, human review, and final trace recording."
 
-wing_outputs:
-- wing_id: "finder-wing"
-status: "completed_for_review"
-summary: "Identified abstract defensive risk candidates related to over-autonomy, boundary ambiguity, missing trace, and review gate absence."
-output_refs:
-- "risk_candidates"
-residual_risk: "Risk candidates remain abstract and require analysis."
+  wing_outputs:
+    - wing_id: "finder-wing"
+      status: "completed_for_review"
+      summary: "Identified abstract defensive risk candidates related to over-autonomy, boundary ambiguity, missing trace, and review gate absence."
+      output_refs:
+        - "risk_candidates"
+      residual_risk: "Risk candidates remain abstract and require analysis."
 
-- wing_id: "analyst-wing"
-  status: "completed_for_review"
-  summary: "Analyzed affected boundaries, review gates, and potential impact without expanding into unsafe operational detail."
-  output_refs:
-    - "defensive_analysis"
-  residual_risk: "Impact assessment requires confirmation by a reviewer."
+    - wing_id: "analyst-wing"
+      status: "completed_for_review"
+      summary: "Analyzed affected boundaries, review gates, and potential impact without expanding into unsafe operational detail."
+      output_refs:
+        - "defensive_analysis"
+      residual_risk: "Impact assessment requires confirmation by a reviewer."
 
-- wing_id: "repair-wing"
-  status: "completed_for_review"
-  summary: "Prepared repair-first recommendations including least-privilege tool scope, explicit stop conditions, and mandatory trace receipts."
-  output_refs:
-    - "repair_plan"
-  residual_risk: "Repair plan is not deployment-ready without verification and review."
+    - wing_id: "repair-wing"
+      status: "completed_for_review"
+      summary: "Prepared repair-first recommendations including least-privilege tool scope, explicit stop conditions, and mandatory trace receipts."
+      output_refs:
+        - "repair_plan"
+      residual_risk: "Repair plan is not deployment-ready without verification and review."
 
-- wing_id: "verifier-wing"
-  status: "completed_for_review"
-  summary: "Prepared a verification checklist for the proposed repair plan."
-  output_refs:
-    - "verification_checklist"
-  residual_risk: "Verification remains checklist-level until environment-specific review."
+    - wing_id: "verifier-wing"
+      status: "completed_for_review"
+      summary: "Prepared a verification checklist for the proposed repair plan."
+      output_refs:
+        - "verification_checklist"
+      residual_risk: "Verification remains checklist-level until environment-specific review."
 
-- wing_id: "boundary-wing"
-  status: "completed_for_review"
-  summary: "Confirmed that permission expansion, deployment, external export, and high-impact action require review gates."
-  output_refs:
-    - "boundary_decision"
-  residual_risk: "Boundary decision requires human confirmation before external use."
+    - wing_id: "boundary-wing"
+      status: "completed_for_review"
+      summary: "Confirmed that permission expansion, deployment, external export, and high-impact action require review gates."
+      output_refs:
+        - "boundary_decision"
+      residual_risk: "Boundary decision requires human confirmation before external use."
 
-- wing_id: "bridge-wing"
-  status: "completed_for_review"
-  summary: "Prepared a safe trace receipt bridge for external review without publishing or synchronizing automatically."
-  output_refs:
-    - "trace_receipt_bridge"
-  residual_risk: "External export requires human review."
+    - wing_id: "bridge-wing"
+      status: "completed_for_review"
+      summary: "Prepared a safe trace receipt bridge for external review without publishing or synchronizing automatically."
+      output_refs:
+        - "trace_receipt_bridge"
+      residual_risk: "External export requires human review."
 
-- wing_id: "human-gate"
-  status: "requires_review"
-  summary: "Human review is required before completion, external export, deployment, or publication."
-  output_refs:
-    - "review_decision"
-  residual_risk: "No final approval has been granted in this example."
+    - wing_id: "human-gate"
+      status: "requires_review"
+      summary: "Human review is required before completion, external export, deployment, or publication."
+      output_refs:
+        - "review_decision"
+      residual_risk: "No final approval has been granted in this example."
 
-- wing_id: "trace-core"
-  status: "drafted"
-  summary: "Recorded orchestration chain, wing outputs, handoffs, blocking conditions, residual risks, and review status."
-  output_refs:
-    - "orchestration_receipt"
-  residual_risk: "Final trace remains review-required."
+    - wing_id: "trace-core"
+      status: "drafted"
+      summary: "Recorded orchestration chain, wing outputs, handoffs, blocking conditions, residual risks, and review status."
+      output_refs:
+        - "orchestration_receipt"
+      residual_risk: "Final trace remains review-required."
 
-handoff_chain:
-- from_wing: "finder-wing"
-to_wing: "analyst-wing"
-status: "completed"
-trace_recorded: true
+  handoff_chain:
+    - from_wing: "finder-wing"
+      to_wing: "analyst-wing"
+      status: "completed"
+      trace_recorded: true
 
-- from_wing: "analyst-wing"
-  to_wing: "repair-wing"
-  status: "completed"
-  trace_recorded: true
+    - from_wing: "analyst-wing"
+      to_wing: "repair-wing"
+      status: "completed"
+      trace_recorded: true
 
-- from_wing: "repair-wing"
-  to_wing: "verifier-wing"
-  status: "completed"
-  trace_recorded: true
+    - from_wing: "repair-wing"
+      to_wing: "verifier-wing"
+      status: "completed"
+      trace_recorded: true
 
-- from_wing: "verifier-wing"
-  to_wing: "boundary-wing"
-  status: "completed"
-  trace_recorded: true
+    - from_wing: "verifier-wing"
+      to_wing: "boundary-wing"
+      status: "completed"
+      trace_recorded: true
 
-- from_wing: "boundary-wing"
-  to_wing: "bridge-wing"
-  status: "completed"
-  trace_recorded: true
+    - from_wing: "boundary-wing"
+      to_wing: "bridge-wing"
+      status: "completed"
+      trace_recorded: true
 
-- from_wing: "bridge-wing"
-  to_wing: "human-gate"
-  status: "requires_review"
-  trace_recorded: true
+    - from_wing: "bridge-wing"
+      to_wing: "human-gate"
+      status: "requires_review"
+      trace_recorded: true
 
-- from_wing: "human-gate"
-  to_wing: "trace-core"
-  status: "requires_review"
-  trace_recorded: true
+    - from_wing: "human-gate"
+      to_wing: "trace-core"
+      status: "requires_review"
+      trace_recorded: true
 
-blocked_conditions:
-- condition_id: "block-unsafe-detail"
-triggered: false
-status: "not_triggered"
-notes: "No unsafe operational detail is included."
+  blocked_conditions:
+    - condition_id: "block-unsafe-detail"
+      triggered: false
+      status: "not_triggered"
+      notes: "No unsafe operational detail is included."
 
-- condition_id: "block-single-wing-completion"
-  triggered: false
-  status: "not_triggered"
-  notes: "The orchestration requires multiple wing handoffs and human review."
+    - condition_id: "block-single-wing-completion"
+      triggered: false
+      status: "not_triggered"
+      notes: "The orchestration requires multiple wing handoffs and human review."
 
-- condition_id: "block-review-gate-missing"
-  triggered: false
-  status: "not_triggered"
-  notes: "Human review gate is present before completion and external export."
+    - condition_id: "block-review-gate-missing"
+      triggered: false
+      status: "not_triggered"
+      notes: "Human review gate is present before completion and external export."
 
-review_decision:
-human_review_required: true
-reviewer_role: "project maintainer or security reviewer"
-decision_status: "review_required"
-notes: "This example is documentation-level and requires review before external export or deployment."
+  review_decision:
+    human_review_required: true
+    reviewer_role: "project maintainer or security reviewer"
+    decision_status: "review_required"
+    notes: "This example is documentation-level and requires review before external export or deployment."
 
-residual_risks:
-- "The orchestration is documentation-level and not approved for deployment."
-- "External export requires review and may require target-specific receipt mapping."
-- "Environment-specific safety checks are required before any operational use."
+  residual_risks:
+    - "The orchestration is documentation-level and not approved for deployment."
+    - "External export requires review and may require target-specific receipt mapping."
+    - "Environment-specific safety checks are required before any operational use."
 
-final_status: "review_required"
+  final_status: "review_required"
 
 safety_boundary:
-prohibited_outputs:
-- "exploit_execution_steps"
-- "unauthorized_intrusion_guidance"
-- "malicious_code"
-- "credential_theft"
-- "persistence_or_evasion"
-- "harmful_payloads"
-- "real_target_attack_instructions"
-- "sensitive_secret_values"
-- "unreviewed_deployment_instruction"
-- "self_permission_expansion"
-- "review_gate_bypass"
-- "trace_suppression"
-required_safeguards:
-- "defensive_context"
-- "abstract_risk_only"
-- "least_privilege"
-- "human_review_required"
-- "trace_required"
-- "no_single_wing_completion"
-- "permission_boundary_required"
-- "external_export_review_required"
-- "residual_risk_recording"
-- "safe_receipt_export_only"
+  prohibited_outputs:
+    - "exploit_execution_steps"
+    - "unauthorized_intrusion_guidance"
+    - "malicious_code"
+    - "credential_theft"
+    - "persistence_or_evasion"
+    - "harmful_payloads"
+    - "real_target_attack_instructions"
+    - "sensitive_secret_values"
+    - "unreviewed_deployment_instruction"
+    - "self_permission_expansion"
+    - "review_gate_bypass"
+    - "trace_suppression"
+  required_safeguards:
+    - "defensive_context"
+    - "abstract_risk_only"
+    - "least_privilege"
+    - "human_review_required"
+    - "trace_required"
+    - "no_single_wing_completion"
+    - "permission_boundary_required"
+    - "external_export_review_required"
+    - "residual_risk_recording"
+    - "safe_receipt_export_only"
 
 human_review:
-required: true
-review_gate: "before_completion"
-reason: "Multi-wing orchestration affects defensive regulation flow, boundary decisions, trace export, and possible downstream interpretation."
-reviewer_role: "project maintainer or security reviewer"
-review_before:
-- "completion"
-- "deployment"
-- "external_export"
-- "permission_expansion"
-- "external_testing"
-- "high_impact_action"
-- "irreversible_action"
-- "production_change"
-- "policy_change"
-- "publication"
+  required: true
+  review_gate: "before_completion"
+  reason: "Multi-wing orchestration affects defensive regulation flow, boundary decisions, trace export, and possible downstream interpretation."
+  reviewer_role: "project maintainer or security reviewer"
+  review_before:
+    - "completion"
+    - "deployment"
+    - "external_export"
+    - "permission_expansion"
+    - "external_testing"
+    - "high_impact_action"
+    - "irreversible_action"
+    - "production_change"
+    - "policy_change"
+    - "publication"
 
 
