@@ -484,4 +484,66 @@ orchestration_receipt:
     - condition_id: "block-single-wing-completion"
       triggered: false
       status: "not_triggered"
-      notes: "The orchestration requires multiple
+      notes: "The orchestration requires multiple wing handoffs and cannot complete with a single wing."
+
+    - condition_id: "block-review-gate-missing"
+      triggered: false
+      status: "not_triggered"
+      notes: "Human review gate is present before completion and external export."
+
+review_decision:
+  human_review_required: true
+  reviewer_role: "project maintainer or security reviewer"
+  decision_status: "review_required"
+  notes: "This example is documentation-level and requires review before external export or deployment."
+
+residual_risks:
+  - "The orchestration is documentation-level and not approved for deployment."
+  - "External export requires review and may require target-specific receipt mapping."
+  - "Environment-specific safety checks are required before any operational use."
+
+final_status: "review_required"
+
+safety_boundary:
+  prohibited_outputs:
+    - "exploit_execution_steps"
+    - "unauthorized_intrusion_guidance"
+    - "malicious_code"
+    - "credential_theft"
+    - "persistence_or_evasion"
+    - "harmful_payloads"
+    - "real_target_attack_instructions"
+    - "sensitive_secret_values"
+    - "unreviewed_deployment_instruction"
+    - "self_permission_expansion"
+    - "review_gate_bypass"
+    - "trace_suppression"
+  required_safeguards:
+    - "defensive_context"
+    - "abstract_risk_only"
+    - "least_privilege"
+    - "human_review_required"
+    - "trace_required"
+    - "no_single_wing_completion"
+    - "permission_boundary_required"
+    - "external_export_review_required"
+    - "residual_risk_recording"
+    - "safe_receipt_export_only"
+
+human_review:
+  required: true
+  review_gate: "before_completion"
+  reason: "Multi-wing orchestration affects defensive regulation flow, boundary decisions, trace export, and possible downstream interpretation."
+  reviewer_role: "project maintainer or security reviewer"
+  review_before:
+    - "completion"
+    - "deployment"
+    - "external_export"
+    - "permission_expansion"
+    - "external_testing"
+    - "high_impact_action"
+    - "irreversible_action"
+    - "production_change"
+    - "policy_change"
+    - "publication"
+
