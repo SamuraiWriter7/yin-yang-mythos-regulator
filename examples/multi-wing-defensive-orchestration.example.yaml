@@ -26,14 +26,14 @@ source_records:
     summary: "Exported internal defensive regulation records into an external trace receipt bridge."
 
 orchestration_policy:
-no_single_wing_completion: true
-human_review_required: true
-trace_required: true
-execution_requires_human_gate: true
-least_privilege_required: true
-external_export_requires_review: true
-unsafe_detail_expansion_allowed: "not_allowed"
-principle: "No wing may complete the loop alone."
+  no_single_wing_completion: true
+  human_review_required: true
+  trace_required: true
+  execution_requires_human_gate: true
+  least_privilege_required: true
+  external_export_requires_review: true
+  unsafe_detail_expansion_allowed: "not_allowed"
+  principle: "No wing may complete the loop alone."
 
 wings:
   - wing_id: "finder-wing"
