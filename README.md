@@ -1,6 +1,6 @@
 # Yin-Yang Mythos Regulator
 
-**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, and traceable review.
+**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, verification, human review, and traceable records.
 
 It is designed as the structural core of **陰陽ミトス調律丸** — a small regulator model / GPT concept that uses a yin-yang structure to redirect high-capability AI insight toward protection rather than exploitation.
 
@@ -29,7 +29,7 @@ Instead of asking:
 
 it asks:
 
-> What must be protected, repaired, and recorded?
+> What must be protected, repaired, verified, recorded, and reviewed?
 
 The goal is not to suppress capability.
 The goal is to regulate capability into defensive structure.
@@ -100,9 +100,41 @@ It records:
 * transformation process
 * uncertainty
 * final regulation shift
+* residual risks
 * human review requirements
 
 Kazene Core ensures that the system does not merely generate advice, but leaves a reviewable trace.
+
+---
+
+## Defensive Repair Loop
+
+v0.2 introduces the **Defensive Repair Loop**.
+
+In v0.1, the protocol defines a regulation record:
+
+```text
+from: How can this be exploited?
+to:   What must be protected and repaired?
+```
+
+In v0.2, that shift becomes a loop:
+
+```text
+Observe -> Analyze -> Repair -> Verify -> Record -> Review
+```
+
+The loop ensures that risk observation returns to defensive structure.
+
+It converts abstract risk into:
+
+* repair actions
+* verification checklists
+* trace receipts
+* residual risk records
+* human review gates
+
+> Defensive repair is not a one-time answer; it is a traceable loop.
 
 ---
 
@@ -111,9 +143,13 @@ Kazene Core ensures that the system does not merely generate advice, but leaves 
 ```text
 .
 ├── schemas/
-│   └── mythos-regulation-record.schema.json
+│   ├── mythos-regulation-record.schema.json
+│   └── defensive-repair-loop.schema.json
 ├── examples/
-│   └── mythos-regulation-record.example.yaml
+│   ├── mythos-regulation-record.example.yaml
+│   └── defensive-repair-loop.example.yaml
+├── docs/
+│   └── defensive-repair-loop.md
 ├── scripts/
 │   └── validate_examples.py
 ├── .github/
@@ -126,11 +162,11 @@ Kazene Core ensures that the system does not merely generate advice, but leaves 
 
 ---
 
-## Schema
+## Schemas
 
 ### `mythos-regulation-record.schema.json`
 
-The schema defines a structured record for shifting a target from offensive or expansive tendency into defensive repair.
+Defines a structured record for shifting a target from offensive or expansive tendency into defensive repair.
 
 A record includes:
 
@@ -144,13 +180,32 @@ A record includes:
 * trace receipt
 * human review requirement
 
+### `defensive-repair-loop.schema.json`
+
+Defines a traceable loop for turning abstract risk observations into verified defensive repair actions.
+
+A loop includes:
+
+* source record
+* trigger
+* loop policy
+* observe stage
+* analyze stage
+* repair stage
+* verify stage
+* record stage
+* review stage
+* repair outputs
+* trace receipt
+* human review gate
+
 ---
 
-## Example
+## Examples
 
 ### `mythos-regulation-record.example.yaml`
 
-The example demonstrates how an over-autonomous tool-using agent design can be reframed from maximum autonomy into defensive, traceable, human-reviewed operation.
+Demonstrates how an over-autonomous tool-using agent design can be reframed from maximum autonomy into defensive, traceable, human-reviewed operation.
 
 The example focuses on:
 
@@ -159,6 +214,45 @@ The example focuses on:
 * mandatory trace receipts
 * human review
 * defensive verification
+
+### `defensive-repair-loop.example.yaml`
+
+Demonstrates how the v0.1 regulation record can be expanded into a full defensive repair loop.
+
+The example focuses on:
+
+* observing boundary gaps
+* analyzing priority and affected boundaries
+* repairing with minimum defensive changes
+* verifying via checklist
+* recording trace receipt
+* routing to human review
+
+---
+
+## Documentation
+
+### `docs/defensive-repair-loop.md`
+
+Explains the v0.2 loop model:
+
+```text
+Observe -> Analyze -> Repair -> Verify -> Record -> Review
+```
+
+It describes:
+
+* purpose
+* core principle
+* stage definitions
+* loop policy
+* allowed environments
+* repair outputs
+* trace receipt
+* human review
+* relationship to v0.1
+* safety boundary
+* example use cases
 
 ---
 
@@ -183,6 +277,10 @@ Expected output:
   schema : schemas/mythos-regulation-record.schema.json
   example: examples/mythos-regulation-record.example.yaml
 [ok] mythos-regulation-record.example.yaml is valid
+[validate] Defensive Repair Loop
+  schema : schemas/defensive-repair-loop.schema.json
+  example: examples/defensive-repair-loop.example.yaml
+[ok] defensive-repair-loop.example.yaml is valid
 ```
 
 ---
@@ -201,7 +299,7 @@ It validates examples against JSON Schemas on:
 * pull request
 * manual workflow dispatch
 
-This keeps the protocol CI-verifiable from v0.1 onward.
+This keeps the protocol CI-verifiable from the earliest versions.
 
 ---
 
@@ -216,8 +314,9 @@ It is intended for:
 * defensive system design
 * security posture improvement
 * traceability design
-* human-review gate design
+* stop-condition design
 * repair-first AI regulation
+* human-review gate design
 
 It is not intended for:
 
@@ -228,14 +327,17 @@ It is not intended for:
 * credential theft
 * evasion or persistence
 * real-target attack planning
+* unreviewed deployment
 
-All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, and traceable review.
+All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, or review.
 
 ---
 
-## v0.1 Scope
+## Version Scope
 
-Version `0.1.0` defines the minimum regulation record.
+### v0.1 — Mythos Regulation Record
+
+v0.1 defines the minimum regulation record.
 
 It establishes:
 
@@ -247,21 +349,30 @@ It establishes:
 * schema validation
 * CI validation
 
-This is the first working furnace: offensive heat is not released outward; it is returned into defensive structure.
+### v0.2 — Defensive Repair Loop
+
+v0.2 extends the record into a loop.
+
+It establishes:
+
+* observe stage
+* analyze stage
+* repair stage
+* verify stage
+* record stage
+* review stage
+* repair outputs
+* loop policy
+* allowed environments
+* residual risk records
+* mandatory human review gate
+
+v0.1 defines the furnace.
+v0.2 adds circulation.
 
 ---
 
 ## Roadmap
-
-### v0.2 — Defensive Repair Loop
-
-Define a structured loop for:
-
-* finding risks
-* classifying impact
-* generating repair actions
-* verifying repairs
-* recording review status
 
 ### v0.3 — Agent Permission Boundary
 
@@ -269,7 +380,7 @@ Add a schema for reviewing AI agent tool permissions, autonomy level, stop condi
 
 ### v0.4 — Trace Receipt Bridge
 
-Connect Mythos Regulation Records with external trace / receipt systems.
+Connect Mythos Regulation Records and Defensive Repair Loops with external trace / receipt systems.
 
 ### v0.5 — Multi-Wing Defensive Orchestration
 
@@ -292,7 +403,7 @@ It changes the center of gravity.
 
 ```text
 from: How can this be exploited?
-to:   What must be protected and repaired?
+to:   What must be protected, repaired, verified, recorded, and reviewed?
 ```
 
 The model is simple:
@@ -300,6 +411,7 @@ The model is simple:
 > Observe with Yang.
 > Repair with Yin.
 > Record with Kazene.
+> Review before deployment.
 
 ---
 
@@ -314,3 +426,4 @@ Recommended options:
 * CC BY 4.0 for documentation-oriented use
 
 Choose the license that best fits the intended repository governance.
+
