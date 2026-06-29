@@ -1,0 +1,483 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.org/schemas/trace-receipt-bridge.schema.json",
+"title": "Trace Receipt Bridge",
+"description": "A bridge schema for exporting defensive regulation records, repair loops, and agent permission boundaries into external trace or receipt systems.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"schema_version",
+"bridge_id",
+"created_at",
+"source_records",
+"bridge_target",
+"exported_fields",
+"export_payload",
+"integrity_policy",
+"safety_boundary",
+"human_review"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"const": "0.4.0"
+},
+"bridge_id": {
+"type": "string",
+"description": "Unique identifier for this trace receipt bridge record.",
+"pattern": "^trace-bridge-[a-zA-Z0-9._-]+$"
+},
+"created_at": {
+"type": "string",
+"format": "date-time"
+},
+"source_records": {
+"type": "array",
+"description": "Internal records that are being bridged into an external trace or receipt system.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/source_record"
+}
+},
+"bridge_target": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"target_type",
+"compatible_with",
+"export_purpose"
+],
+"properties": {
+"target_type": {
+"type": "string",
+"enum": [
+"external_trace_receipt",
+"audit_record",
+"provenance_record",
+"royalty_record",
+"memory_record",
+"other"
+]
+},
+"compatible_with": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"ai_search_trace_receipt",
+"kazene_trace_receipt",
+"synchronization_audit_protocol",
+"origin_structure_market",
+"royalty_hook",
+"memory_breathing_protocol",
+"other"
+]
+}
+},
+"export_purpose": {
+"type": "string",
+"minLength": 1
+}
+}
+},
+"exported_fields": {
+"type": "array",
+"description": "Fields that must be exported or summarized into the target trace or receipt system.",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"origin_question",
+"target_summary",
+"regulation_shift",
+"repair_loop_summary",
+"permission_boundary_summary",
+"stop_conditions",
+"review_gates",
+"trace_policy",
+"human_review",
+"residual_risks",
+"final_status",
+"source_chain",
+"safety_boundary"
+]
+}
+},
+"export_payload": {
+"type": "object",
+"description": "Normalized payload to export from internal defensive regulation records into external trace or receipt systems.",
+"additionalProperties": false,
+"required": [
+"origin_question",
+"target_summary",
+"regulation_summary",
+"source_chain",
+"repair_summary",
+"permission_boundary_summary",
+"review_summary",
+"residual_risks",
+"final_status"
+],
+"properties": {
+"origin_question": {
+"type": "string",
+"minLength": 1
+},
+"target_summary": {
+"type": "string",
+"minLength": 1
+},
+"regulation_summary": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"from",
+"to",
+"principle"
+],
+"properties": {
+"from": {
+"type": "string",
+"minLength": 1
+},
+"to": {
+"type": "string",
+"minLength": 1
+},
+"principle": {
+"type": "string",
+"minLength": 1
+}
+}
+},
+"source_chain": {
+"type": "array",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/source_record"
+}
+},
+"repair_summary": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"loop_id",
+"stage_order",
+"repair_outputs",
+"verification_status"
+],
+"properties": {
+"loop_id": {
+"type": "string",
+"minLength": 1
+},
+"stage_order": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"observe",
+"analyze",
+"repair",
+"verify",
+"record",
+"review"
+]
+}
+},
+"repair_outputs": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string"
+}
+},
+"verification_status": {
+"type": "string",
+"enum": [
+"not_started",
+"checklist_defined",
+"requires_review",
+"verified_in_test",
+"deployed_with_review",
+"blocked"
+]
+}
+}
+},
+"permission_boundary_summary": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"boundary_id",
+"autonomy_level",
+"allowed_environment",
+"self_permission_expansion_allowed",
+"review_required"
+],
+"properties": {
+"boundary_id": {
+"type": "string",
+"minLength": 1
+},
+"autonomy_level": {
+"type": "string",
+"enum": [
+"manual_only",
+"suggestion_only",
+"review_required",
+"bounded_autonomy",
+"high_risk_blocked"
+]
+},
+"allowed_environment": {
+"type": "string",
+"enum": [
+"documentation_only",
+"local_test_environment",
+"authorized_staging_environment",
+"authorized_production_with_review"
+]
+},
+"self_permission_expansion_allowed": {
+"type": "boolean",
+"const": false
+},
+"review_required": {
+"type": "boolean",
+"const": true
+},
+"stop_conditions": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"review_gates": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+}
+}
+},
+"review_summary": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"human_review_required",
+"reviewer_role",
+"review_before"
+],
+"properties": {
+"human_review_required": {
+"type": "boolean",
+"const": true
+},
+"reviewer_role": {
+"type": "string",
+"minLength": 1
+},
+"review_before": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"deployment",
+"permission_expansion",
+"external_testing",
+"high_impact_action",
+"irreversible_action",
+"production_change",
+"policy_change",
+"external_export"
+]
+}
+}
+}
+},
+"residual_risks": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"final_status": {
+"type": "string",
+"enum": [
+"drafted",
+"ready_for_review",
+"review_required",
+"export_ready",
+"exported_with_review",
+"blocked"
+]
+}
+}
+},
+"integrity_policy": {
+"type": "object",
+"description": "Integrity requirements for exporting defensive regulation into external trace systems.",
+"additionalProperties": false,
+"required": [
+"trace_required",
+"review_required",
+"tamper_evidence_required",
+"source_chain_required",
+"hash_recommended"
+],
+"properties": {
+"trace_required": {
+"type": "boolean",
+"const": true
+},
+"review_required": {
+"type": "boolean",
+"const": true
+},
+"tamper_evidence_required": {
+"type": "boolean",
+"const": true
+},
+"source_chain_required": {
+"type": "boolean",
+"const": true
+},
+"hash_recommended": {
+"type": "boolean"
+},
+"hash_method": {
+"type": "string",
+"enum": [
+"sha256",
+"sha512",
+"not_applicable"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"safety_boundary": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"export_must_not_include",
+"export_must_include"
+],
+"properties": {
+"export_must_not_include": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"exploit_execution_steps",
+"unauthorized_intrusion_guidance",
+"malicious_code",
+"credential_theft",
+"persistence_or_evasion",
+"harmful_payloads",
+"real_target_attack_instructions",
+"sensitive_secret_values",
+"unreviewed_deployment_instruction"
+]
+}
+},
+"export_must_include": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"defensive_context",
+"source_chain",
+"review_status",
+"residual_risk",
+"safety_boundary",
+"human_review_requirement",
+"trace_policy"
+]
+}
+}
+}
+},
+"human_review": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"required",
+"review_gate",
+"reason",
+"reviewer_role"
+],
+"properties": {
+"required": {
+"type": "boolean",
+"const": true
+},
+"review_gate": {
+"type": "string",
+"enum": [
+"before_external_export",
+"before_publication",
+"before_cross_protocol_sync",
+"before_deployment",
+"always"
+]
+},
+"reason": {
+"type": "string",
+"minLength": 1
+},
+"reviewer_role": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+},
+"$defs": {
+"source_record": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"record_type",
+"record_id",
+"schema_version",
+"summary"
+],
+"properties": {
+"record_type": {
+"type": "string",
+"enum": [
+"mythos_regulation_record",
+"defensive_repair_loop",
+"agent_permission_boundary",
+"trace_receipt_bridge",
+"other"
+]
+},
+"record_id": {
+"type": "string",
+"minLength": 1
+},
+"schema_version": {
+"type": "string",
+"minLength": 1
+},
+"summary": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+}
+}
