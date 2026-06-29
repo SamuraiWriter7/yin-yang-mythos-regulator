@@ -10,9 +10,179 @@ This project follows a lightweight pre-release structure during early protocol f
 
 ### Planned
 
-* Add Multi-Wing Defensive Orchestration model.
 * Add external receipt mapping profiles.
-* Add more examples for agent design, workflow review, system prompt regulation, tool permission review, and trace receipt integration.
+* Add signed trace receipt examples.
+* Add cross-protocol synchronization examples.
+* Add defensive governance templates.
+* Add multi-agent review flow examples.
+* Consider a separate continuation repository after the v0.5 first arc.
+
+---
+
+## [0.5.0-candidate] - 2026-06-29
+
+### Added
+
+* Added `schemas/multi-wing-defensive-orchestration.schema.json`.
+* Added `examples/multi-wing-defensive-orchestration.example.yaml`.
+* Added `docs/multi-wing-defensive-orchestration.md`.
+* Updated `scripts/validate_examples.py` to validate v0.1, v0.2, v0.3, v0.4, and v0.5 examples.
+* Updated `README.md` with v0.5 Multi-Wing Defensive Orchestration documentation.
+* Updated `CHANGELOG.md` with v0.5 candidate notes.
+
+### Defined
+
+* Defined the **Multi-Wing Defensive Orchestration** layer.
+
+* Defined the core orchestration sequence:
+
+  ```text
+  Finder -> Analyst -> Repair -> Verifier -> Boundary -> Bridge -> Human Gate -> Trace Core
+  ```
+
+* Defined the main orchestration principle:
+
+  > No wing may complete the loop alone.
+
+* Defined orchestration policy:
+
+  * no single wing completion
+  * human review required
+  * trace required
+  * execution requires Human Gate
+  * least privilege required
+  * external export requires review
+  * unsafe detail expansion not allowed
+
+* Defined specialized wings:
+
+  * Finder Wing
+  * Analyst Wing
+  * Repair Wing
+  * Verifier Wing
+  * Boundary Wing
+  * Bridge Wing
+  * Human Gate
+  * Trace Core
+
+* Defined wing-level controls:
+
+  * wing ID
+  * wing type
+  * role
+  * responsibility
+  * input sources
+  * output targets
+  * allowed outputs
+  * prohibited outputs
+  * execution allowance
+  * review requirement
+  * trace requirement
+
+* Defined handoff rules:
+
+  * Finder Wing to Analyst Wing
+  * Analyst Wing to Repair Wing
+  * Repair Wing to Verifier Wing
+  * Verifier Wing to Boundary Wing
+  * Boundary Wing to Bridge Wing
+  * Bridge Wing to Human Gate
+  * Human Gate to Trace Core
+
+* Defined handoff conditions:
+
+  * after trace recorded
+  * after review gate
+  * after boundary check
+  * after verification checklist
+  * after safe export check
+  * after human review
+
+* Defined blocking conditions:
+
+  * unsafe detail detected
+  * unclear authorization
+  * missing trace
+  * missing review gate
+  * boundary failure
+  * human review required
+  * external export requested
+  * deployment requested
+  * permission expansion requested
+  * single wing completion attempted
+  * residual risk unrecorded
+
+* Defined required actions:
+
+  * stop
+  * pause
+  * block
+  * escalate to human review
+  * record and pause
+  * remove unsafe detail
+  * return to previous wing
+  * provide defensive alternative
+
+* Defined orchestration receipt:
+
+  * origin question
+  * orchestration summary
+  * wing outputs
+  * handoff chain
+  * blocked conditions
+  * review decision
+  * residual risks
+  * final status
+
+* Defined review decision states:
+
+  * not reviewed
+  * review required
+  * approved for documentation
+  * approved for staging
+  * approved for export
+  * blocked
+
+* Defined final orchestration statuses:
+
+  * drafted
+  * ready for review
+  * review required
+  * approved for documentation
+  * export ready
+  * blocked
+
+### Philosophy
+
+* Extended the v0.1 principle:
+
+  > Offensive insight is not executed; it is regulated into defensive repair.
+
+* Extended the v0.2 principle:
+
+  > Defensive repair is not a one-time answer; it is a traceable loop.
+
+* Extended the v0.3 principle:
+
+  > Capability must pass through permission boundaries before action.
+
+* Extended the v0.4 principle:
+
+  > Defensive regulation must be exportable as traceable receipt.
+
+* Added the v0.5 principle:
+
+  > No wing may complete the loop alone.
+
+### Notes
+
+* v0.1 defines the furnace.
+* v0.2 adds circulation.
+* v0.3 draws the boundary before the fire moves.
+* v0.4 exports the regulated fire as traceable receipt.
+* v0.5 prevents any single wing from completing the loop alone.
+* The protocol now covers regulation records, defensive repair loops, agent permission boundaries, trace receipt bridges, and multi-wing defensive orchestration.
+* v0.5 can serve as the closing point of the first arc.
 
 ---
 
@@ -453,3 +623,14 @@ This project follows a lightweight pre-release structure during early protocol f
 
 * Promote `0.4.0-candidate` to `0.4.0` after validation and review.
 * Use v0.4 as the baseline for the Trace Receipt Bridge layer.
+
+---
+
+## [0.5.0] - Pending
+
+### Expected
+
+* Promote `0.5.0-candidate` to `0.5.0` after validation and review.
+* Use v0.5 as the baseline for the Multi-Wing Defensive Orchestration layer.
+* Treat v0.5 as the closing point of the first protocol arc.
+
