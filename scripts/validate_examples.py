@@ -12,6 +12,9 @@ Validated targets:
 
 * schemas/agent-permission-boundary.schema.json
 * examples/agent-permission-boundary.example.yaml
+
+* schemas/trace-receipt-bridge.schema.json
+* examples/trace-receipt-bridge.example.yaml
 """
 
 from __future__ import annotations
@@ -41,6 +44,11 @@ VALIDATION_TARGETS = [
         "name": "Agent Permission Boundary",
         "schema": ROOT / "schemas" / "agent-permission-boundary.schema.json",
         "example": ROOT / "examples" / "agent-permission-boundary.example.yaml",
+    },
+    {
+        "name": "Trace Receipt Bridge",
+        "schema": ROOT / "schemas" / "trace-receipt-bridge.schema.json",
+        "example": ROOT / "examples" / "trace-receipt-bridge.example.yaml",
     },
 ]
 
@@ -112,5 +120,6 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
 
 
