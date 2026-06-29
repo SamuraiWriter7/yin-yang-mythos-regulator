@@ -2,6 +2,15 @@ schema_version: "0.5.0"
 orchestration_id: "multi-wing-defensive-orchestration-v0-5"
 created_at: "2026-06-29T00:00:00Z"
 
+safety_boundary:
+  status: "review_required"
+  notes: "Boundary review required before completion."
+
+human_review:
+  reviewer_role: "project maintainer or security reviewer"
+  decision_status: "review_required"
+  notes: "Human review required before finalization."
+
 purpose: "Coordinate defensive AI regulation across multiple specialized wings so that no single wing can complete the loop alone."
 
 source_records:
