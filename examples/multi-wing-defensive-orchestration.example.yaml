@@ -5,26 +5,25 @@ created_at: "2026-06-29T00:00:00Z"
 purpose: "Coordinate defensive AI regulation across multiple specialized wings so that no single wing can complete the loop alone."
 
 source_records:
+  - record_type: "mythos_regulation_record"
+    record_id: "mythos-reg-agent-permission-boundary-v0-1"
+    schema_version: "0.1.0"
+    summary: "Converted over-autonomous agent tendency into defensive repair and boundary preservation."
 
-* record_type: "mythos_regulation_record"
-  record_id: "mythos-reg-agent-permission-boundary-v0-1"
-  schema_version: "0.1.0"
-  summary: "Converted over-autonomous agent tendency into defensive repair and boundary preservation."
+  - record_type: "defensive_repair_loop"
+    record_id: "repair-loop-agent-permission-boundary-v0-2"
+    schema_version: "0.2.0"
+    summary: "Expanded the regulation record into an observe, analyze, repair, verify, record, and review loop."
 
-* record_type: "defensive_repair_loop"
-  record_id: "repair-loop-agent-permission-boundary-v0-2"
-  schema_version: "0.2.0"
-  summary: "Expanded the regulation record into an observe, analyze, repair, verify, record, and review loop."
+ - record_type: "agent_permission_boundary"
+   record_id: "agent-boundary-defensive-repair-assistant-v0-3"
+   schema_version: "0.3.0"
+   summary: "Defined permission boundaries, stop conditions, trace policy, and review gates for a defensive repair assistant."
 
-* record_type: "agent_permission_boundary"
-  record_id: "agent-boundary-defensive-repair-assistant-v0-3"
-  schema_version: "0.3.0"
-  summary: "Defined permission boundaries, stop conditions, trace policy, and review gates for a defensive repair assistant."
-
-* record_type: "trace_receipt_bridge"
-  record_id: "trace-bridge-agent-boundary-v0-4"
-  schema_version: "0.4.0"
-  summary: "Exported internal defensive regulation records into an external trace receipt bridge."
+ - record_type: "trace_receipt_bridge"
+   record_id: "trace-bridge-agent-boundary-v0-4"
+   schema_version: "0.4.0"
+   summary: "Exported internal defensive regulation records into an external trace receipt bridge."
 
 orchestration_policy:
 no_single_wing_completion: true
@@ -458,7 +457,6 @@ residual_risk: "Risk candidates remain abstract and require analysis."
   output_refs:
     - "orchestration_receipt"
   residual_risk: "Final trace remains review-required."
-```
 
 handoff_chain:
 - from_wing: "finder-wing"
@@ -466,7 +464,6 @@ to_wing: "analyst-wing"
 status: "completed"
 trace_recorded: true
 
-```
 - from_wing: "analyst-wing"
   to_wing: "repair-wing"
   status: "completed"
@@ -496,7 +493,6 @@ trace_recorded: true
   to_wing: "trace-core"
   status: "requires_review"
   trace_recorded: true
-```
 
 blocked_conditions:
 - condition_id: "block-unsafe-detail"
@@ -504,7 +500,6 @@ triggered: false
 status: "not_triggered"
 notes: "No unsafe operational detail is included."
 
-```
 - condition_id: "block-single-wing-completion"
   triggered: false
   status: "not_triggered"
@@ -514,7 +509,6 @@ notes: "No unsafe operational detail is included."
   triggered: false
   status: "not_triggered"
   notes: "Human review gate is present before completion and external export."
-```
 
 review_decision:
 human_review_required: true
