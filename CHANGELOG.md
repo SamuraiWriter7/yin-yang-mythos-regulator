@@ -10,10 +10,138 @@ This project follows a lightweight pre-release structure during early protocol f
 
 ### Planned
 
-* Add Agent Permission Boundary schema.
 * Add Trace Receipt Bridge documentation.
 * Add Multi-Wing Defensive Orchestration model.
-* Add more examples for agent design, workflow review, system prompt regulation, and tool permission review.
+* Add more examples for agent design, workflow review, system prompt regulation, tool permission review, and trace receipt integration.
+
+---
+
+## [0.3.0-candidate] - 2026-06-29
+
+### Added
+
+* Added `schemas/agent-permission-boundary.schema.json`.
+* Added `examples/agent-permission-boundary.example.yaml`.
+* Added `docs/agent-permission-boundary.md`.
+* Updated `scripts/validate_examples.py` to validate v0.1, v0.2, and v0.3 examples.
+* Updated `README.md` with v0.3 Agent Permission Boundary documentation.
+* Updated `CHANGELOG.md` with v0.3 candidate notes.
+
+### Defined
+
+* Defined the **Agent Permission Boundary** as the v0.3 permission control layer.
+
+* Defined the core boundary sequence:
+
+  ```text
+  Capability -> Permission Boundary -> Action
+  ```
+
+* Defined the main boundary principle:
+
+  > Capability must pass through permission boundaries before action.
+
+* Defined the agent profile structure:
+
+  * name
+  * role
+  * description
+  * intended use
+  * autonomy level
+
+* Defined autonomy levels:
+
+  * `manual_only`
+  * `suggestion_only`
+  * `review_required`
+  * `bounded_autonomy`
+  * `high_risk_blocked`
+
+* Defined permission scope:
+
+  * allowed tools
+  * restricted tools
+  * prohibited actions
+
+* Defined prohibited actions:
+
+  * self-permission expansion
+  * unauthorized testing
+  * external target interaction without review
+  * production deployment without review
+  * irreversible action without review
+  * credential collection
+  * malicious code generation
+  * exploit execution
+  * persistence or evasion
+  * policy bypass
+  * trace suppression
+  * human review bypass
+
+* Defined autonomy control:
+
+  * allowed decision types
+  * blocked decision types
+  * actions requiring review
+
+* Defined stop conditions:
+
+  * unclear authorization
+  * external target involvement
+  * high-impact action request
+  * irreversible action request
+  * permission expansion request
+  * production change request
+  * missing trace
+  * missing review gate
+  * unsafe or malicious request
+  * unclear scope
+
+* Defined review gates:
+
+  * before deployment
+  * before permission expansion
+  * before external testing
+  * before high-impact action
+  * before irreversible action
+  * before production change
+  * before policy change
+
+* Defined trace policy:
+
+  * trace required
+  * receipt required for tool use
+  * stop condition recording
+  * review decision recording
+  * minimum trace fields
+
+* Defined deployment policy:
+
+  * allowed environment
+  * deployment without review blocked
+  * external testing without review blocked
+  * rollback required for deployment
+
+### Philosophy
+
+* Extended the v0.1 principle:
+
+  > Offensive insight is not executed; it is regulated into defensive repair.
+
+* Extended the v0.2 principle:
+
+  > Defensive repair is not a one-time answer; it is a traceable loop.
+
+* Added the v0.3 principle:
+
+  > Capability must pass through permission boundaries before action.
+
+### Notes
+
+* v0.1 defines the furnace.
+* v0.2 adds circulation.
+* v0.3 draws the boundary before the fire moves.
+* The protocol now covers regulation records, defensive repair loops, and agent permission boundaries.
 
 ---
 
@@ -168,5 +296,15 @@ This project follows a lightweight pre-release structure during early protocol f
 ### Expected
 
 * Promote `0.2.0-candidate` to `0.2.0` after validation and review.
-* Use v0.2 as the baseline for the next Agent Permission Boundary layer.
+* Use v0.2 as the baseline for the Defensive Repair Loop layer.
+
+---
+
+## [0.3.0] - Pending
+
+### Expected
+
+* Promote `0.3.0-candidate` to `0.3.0` after validation and review.
+* Use v0.3 as the baseline for the Agent Permission Boundary layer.
+
 
