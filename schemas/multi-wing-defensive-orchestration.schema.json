@@ -1,0 +1,698 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.org/schemas/multi-wing-defensive-orchestration.schema.json",
+"title": "Multi-Wing Defensive Orchestration",
+"description": "A schema for orchestrating defensive AI regulation across multiple specialized wings without allowing any single wing to complete the loop alone.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"schema_version",
+"orchestration_id",
+"created_at",
+"purpose",
+"source_records",
+"orchestration_policy",
+"wings",
+"handoff_rules",
+"blocking_conditions",
+"orchestration_receipt",
+"safety_boundary",
+"human_review"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"const": "0.5.0"
+},
+"orchestration_id": {
+"type": "string",
+"description": "Unique identifier for this multi-wing defensive orchestration record.",
+"pattern": "^multi-wing-[a-zA-Z0-9.*-]+$"
+},
+"created_at": {
+"type": "string",
+"format": "date-time"
+},
+"purpose": {
+"type": "string",
+"minLength": 1
+},
+"source_records": {
+"type": "array",
+"description": "Prior regulation, repair, boundary, or bridge records that this orchestration builds upon.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/source_record"
+}
+},
+"orchestration_policy": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"no_single_wing_completion",
+"human_review_required",
+"trace_required",
+"execution_requires_human_gate",
+"least_privilege_required",
+"external_export_requires_review",
+"unsafe_detail_expansion_allowed"
+],
+"properties": {
+"no_single_wing_completion": {
+"type": "boolean",
+"const": true
+},
+"human_review_required": {
+"type": "boolean",
+"const": true
+},
+"trace_required": {
+"type": "boolean",
+"const": true
+},
+"execution_requires_human_gate": {
+"type": "boolean",
+"const": true
+},
+"least_privilege_required": {
+"type": "boolean",
+"const": true
+},
+"external_export_requires_review": {
+"type": "boolean",
+"const": true
+},
+"unsafe_detail_expansion_allowed": {
+"type": "string",
+"enum": [
+"not_allowed",
+"abstract_only"
+]
+},
+"principle": {
+"type": "string",
+"minLength": 1
+}
+}
+},
+"wings": {
+"type": "array",
+"description": "Specialized wings participating in the defensive orchestration.",
+"minItems": 2,
+"items": {
+"$ref": "#/$defs/wing"
+}
+},
+"handoff_rules": {
+"type": "array",
+"description": "Rules defining how outputs move from one wing to another.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/handoff_rule"
+}
+},
+"blocking_conditions": {
+"type": "array",
+"description": "Conditions that block or pause the orchestration.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/blocking_condition"
+}
+},
+"orchestration_receipt": {
+"type": "object",
+"description": "Final traceable receipt of the multi-wing defensive orchestration.",
+"additionalProperties": false,
+"required": [
+"origin_question",
+"orchestration_summary",
+"wing_outputs",
+"handoff_chain",
+"blocked_conditions",
+"review_decision",
+"residual_risks",
+"final_status"
+],
+"properties": {
+"origin_question": {
+"type": "string",
+"minLength": 1
+},
+"orchestration_summary": {
+"type": "string",
+"minLength": 1
+},
+"wing_outputs": {
+"type": "array",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/wing_output"
+}
+},
+"handoff_chain": {
+"type": "array",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/handoff_status"
+}
+},
+"blocked_conditions": {
+"type": "array",
+"items": {
+"$ref": "#/$defs/blocked_condition_status"
+},
+"default": []
+},
+"review_decision": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"human_review_required",
+"reviewer_role",
+"decision_status"
+],
+"properties": {
+"human_review_required": {
+"type": "boolean",
+"const": true
+},
+"reviewer_role": {
+"type": "string",
+"minLength": 1
+},
+"decision_status": {
+"type": "string",
+"enum": [
+"not_reviewed",
+"review_required",
+"approved_for_documentation",
+"approved_for_staging",
+"approved_for_export",
+"blocked"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"residual_risks": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"final_status": {
+"type": "string",
+"enum": [
+"drafted",
+"ready_for_review",
+"review_required",
+"approved_for_documentation",
+"export_ready",
+"blocked"
+]
+}
+}
+},
+"safety_boundary": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"prohibited_outputs",
+"required_safeguards"
+],
+"properties": {
+"prohibited_outputs": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"exploit_execution_steps",
+"unauthorized_intrusion_guidance",
+"malicious_code",
+"credential_theft",
+"persistence_or_evasion",
+"harmful_payloads",
+"real_target_attack_instructions",
+"sensitive_secret_values",
+"unreviewed_deployment_instruction",
+"self_permission_expansion",
+"review_gate_bypass",
+"trace_suppression"
+]
+}
+},
+"required_safeguards": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"defensive_context",
+"abstract_risk_only",
+"least_privilege",
+"human_review_required",
+"trace_required",
+"no_single_wing_completion",
+"permission_boundary_required",
+"external_export_review_required",
+"residual_risk_recording",
+"safe_receipt_export_only"
+]
+}
+}
+}
+},
+"human_review": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"required",
+"review_gate",
+"reason",
+"reviewer_role",
+"review_before"
+],
+"properties": {
+"required": {
+"type": "boolean",
+"const": true
+},
+"review_gate": {
+"type": "string",
+"enum": [
+"before_completion",
+"before_external_export",
+"before_deployment",
+"before_permission_expansion",
+"before_publication",
+"always"
+]
+},
+"reason": {
+"type": "string",
+"minLength": 1
+},
+"reviewer_role": {
+"type": "string",
+"minLength": 1
+},
+"review_before": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"completion",
+"deployment",
+"external_export",
+"permission_expansion",
+"external_testing",
+"high_impact_action",
+"irreversible_action",
+"production_change",
+"policy_change",
+"publication"
+]
+}
+}
+}
+}
+},
+"$defs": {
+"source_record": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"record_type",
+"record_id",
+"schema_version",
+"summary"
+],
+"properties": {
+"record_type": {
+"type": "string",
+"enum": [
+"mythos_regulation_record",
+"defensive_repair_loop",
+"agent_permission_boundary",
+"trace_receipt_bridge",
+"multi_wing_defensive_orchestration",
+"other"
+]
+},
+"record_id": {
+"type": "string",
+"minLength": 1
+},
+"schema_version": {
+"type": "string",
+"minLength": 1
+},
+"summary": {
+"type": "string",
+"minLength": 1
+}
+}
+},
+"wing": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"wing_id",
+"wing_type",
+"role",
+"responsibility",
+"input_from",
+"output_to",
+"allowed_outputs",
+"prohibited_outputs",
+"execution_allowed",
+"review_required",
+"trace_required"
+],
+"properties": {
+"wing_id": {
+"type": "string",
+"pattern": "^[a-z0-9.*-]+-wing$|^human-gate$|^trace-core$"
+},
+"wing_type": {
+"type": "string",
+"enum": [
+"finder",
+"analyst",
+"repair",
+"verifier",
+"boundary",
+"bridge",
+"human_gate",
+"trace_core"
+]
+},
+"role": {
+"type": "string",
+"enum": [
+"abstract_risk_finding",
+"boundary_and_impact_analysis",
+"defensive_repair_generation",
+"repair_verification",
+"permission_boundary_review",
+"trace_receipt_export_preparation",
+"human_review",
+"orchestration_trace"
+]
+},
+"responsibility": {
+"type": "string",
+"minLength": 1
+},
+"input_from": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"output_to": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"allowed_outputs": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"risk_candidates",
+"defensive_analysis",
+"repair_plan",
+"verification_checklist",
+"boundary_decision",
+"trace_receipt_bridge",
+"review_decision",
+"orchestration_receipt",
+"residual_risk_summary",
+"handoff_record"
+]
+}
+},
+"prohibited_outputs": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string",
+"enum": [
+"exploit_execution_steps",
+"unauthorized_intrusion_guidance",
+"malicious_code",
+"credential_theft",
+"persistence_or_evasion",
+"harmful_payloads",
+"real_target_attack_instructions",
+"sensitive_secret_values",
+"unreviewed_deployment_instruction",
+"self_permission_expansion",
+"review_gate_bypass",
+"trace_suppression"
+]
+}
+},
+"execution_allowed": {
+"type": "boolean"
+},
+"review_required": {
+"type": "boolean"
+},
+"trace_required": {
+"type": "boolean",
+"const": true
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"handoff_rule": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"from_wing",
+"to_wing",
+"required_inputs",
+"required_outputs",
+"handoff_condition",
+"trace_required",
+"blocking_if_missing"
+],
+"properties": {
+"from_wing": {
+"type": "string",
+"minLength": 1
+},
+"to_wing": {
+"type": "string",
+"minLength": 1
+},
+"required_inputs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"required_outputs": {
+"type": "array",
+"minItems": 1,
+"items": {
+"type": "string"
+}
+},
+"handoff_condition": {
+"type": "string",
+"enum": [
+"after_trace_recorded",
+"after_review_gate",
+"after_boundary_check",
+"after_verification_checklist",
+"after_safe_export_check",
+"after_human_review"
+]
+},
+"trace_required": {
+"type": "boolean",
+"const": true
+},
+"blocking_if_missing": {
+"type": "boolean",
+"const": true
+}
+}
+},
+"blocking_condition": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"condition_id",
+"trigger",
+"required_action",
+"reason",
+"blocking"
+],
+"properties": {
+"condition_id": {
+"type": "string",
+"pattern": "^block-[a-zA-Z0-9._-]+$"
+},
+"trigger": {
+"type": "string",
+"enum": [
+"unsafe_detail_detected",
+"authorization_unclear",
+"trace_missing",
+"review_gate_missing",
+"boundary_failure",
+"human_review_required",
+"external_export_requested",
+"deployment_requested",
+"permission_expansion_requested",
+"single_wing_completion_attempted",
+"residual_risk_unrecorded",
+"other"
+]
+},
+"required_action": {
+"type": "string",
+"enum": [
+"stop",
+"pause",
+"block",
+"escalate_to_human_review",
+"record_and_pause",
+"remove_unsafe_detail",
+"return_to_previous_wing",
+"provide_defensive_alternative"
+]
+},
+"reason": {
+"type": "string",
+"minLength": 1
+},
+"blocking": {
+"type": "boolean",
+"const": true
+}
+}
+},
+"wing_output": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"wing_id",
+"status",
+"summary",
+"output_refs"
+],
+"properties": {
+"wing_id": {
+"type": "string",
+"minLength": 1
+},
+"status": {
+"type": "string",
+"enum": [
+"not_started",
+"drafted",
+"completed_for_review",
+"requires_review",
+"approved",
+"blocked"
+]
+},
+"summary": {
+"type": "string",
+"minLength": 1
+},
+"output_refs": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+},
+"residual_risk": {
+"type": "string"
+}
+}
+},
+"handoff_status": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"from_wing",
+"to_wing",
+"status",
+"trace_recorded"
+],
+"properties": {
+"from_wing": {
+"type": "string",
+"minLength": 1
+},
+"to_wing": {
+"type": "string",
+"minLength": 1
+},
+"status": {
+"type": "string",
+"enum": [
+"not_started",
+"ready",
+"completed",
+"requires_review",
+"blocked"
+]
+},
+"trace_recorded": {
+"type": "boolean",
+"const": true
+}
+}
+},
+"blocked_condition_status": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"condition_id",
+"triggered",
+"status"
+],
+"properties": {
+"condition_id": {
+"type": "string",
+"minLength": 1
+},
+"triggered": {
+"type": "boolean"
+},
+"status": {
+"type": "string",
+"enum": [
+"not_triggered",
+"triggered_and_blocked",
+"resolved_after_review",
+"requires_review"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+}
+}
+}
