@@ -15,15 +15,15 @@ source_records:
     schema_version: "0.2.0"
     summary: "Expanded the regulation record into an observe, analyze, repair, verify, record, and review loop."
 
- - record_type: "agent_permission_boundary"
-   record_id: "agent-boundary-defensive-repair-assistant-v0-3"
-   schema_version: "0.3.0"
-   summary: "Defined permission boundaries, stop conditions, trace policy, and review gates for a defensive repair assistant."
+  - record_type: "agent_permission_boundary"
+    record_id: "agent-boundary-defensive-repair-assistant-v0-3"
+    schema_version: "0.3.0"
+    summary: "Defined permission boundaries, stop conditions, trace policy, and review gates for a defensive repair assistant."
 
- - record_type: "trace_receipt_bridge"
-   record_id: "trace-bridge-agent-boundary-v0-4"
-   schema_version: "0.4.0"
-   summary: "Exported internal defensive regulation records into an external trace receipt bridge."
+  - record_type: "trace_receipt_bridge"
+    record_id: "trace-bridge-agent-boundary-v0-4"
+    schema_version: "0.4.0"
+    summary: "Exported internal defensive regulation records into an external trace receipt bridge."
 
 orchestration_policy:
 no_single_wing_completion: true
