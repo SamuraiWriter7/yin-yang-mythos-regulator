@@ -36,365 +36,347 @@ unsafe_detail_expansion_allowed: "not_allowed"
 principle: "No wing may complete the loop alone."
 
 wings:
-
-* wing_id: "finder-wing"
-  wing_type: "finder"
-  role: "abstract_risk_finding"
-  responsibility: "Identify abstract defensive risk candidates without producing exploit steps, attack instructions, or operational misuse detail."
-  input_from: []
-  output_to:
-
-  * "analyst-wing"
+  - wing_id: "finder-wing"
+    wing_type: "finder"
+    role: "abstract_risk_finding"
+    responsibility: "Identify abstract defensive risk candidates without producing exploit steps, attack instructions, or operational misuse detail."
+    input_from: []
+    output_to:
+      - "analyst-wing"
     allowed_outputs:
-  * "risk_candidates"
-  * "handoff_record"
+      - "risk_candidates"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Finder Wing observes only abstract defensive risks."
 
-* wing_id: "analyst-wing"
-  wing_type: "analyst"
-  role: "boundary_and_impact_analysis"
-  responsibility: "Analyze premises, boundaries, impact, and affected review gates from the abstract risk candidates."
-  input_from:
-
-  * "finder-wing"
+  - wing_id: "analyst-wing"
+    wing_type: "analyst"
+    role: "boundary_and_impact_analysis"
+    responsibility: "Analyze premises, boundaries, impact, and affected review gates from the abstract risk candidates."
+    input_from:
+      - "finder-wing"
     output_to:
-  * "repair-wing"
+      - "repair-wing"
     allowed_outputs:
-  * "defensive_analysis"
-  * "residual_risk_summary"
-  * "handoff_record"
+      - "defensive_analysis"
+      - "residual_risk_summary"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Analyst Wing converts risks into defensive impact analysis."
 
-* wing_id: "repair-wing"
-  wing_type: "repair"
-  role: "defensive_repair_generation"
-  responsibility: "Generate repair-first recommendations such as least-privilege scopes, stop conditions, logging requirements, and review gates."
-  input_from:
-
-  * "analyst-wing"
+  - wing_id: "repair-wing"
+    wing_type: "repair"
+    role: "defensive_repair_generation"
+    responsibility: "Generate repair-first recommendations such as least-privilege scopes, stop conditions, logging requirements, and review gates."
+    input_from:
+      - "analyst-wing"
     output_to:
-  * "verifier-wing"
+      - "verifier-wing"
     allowed_outputs:
-  * "repair_plan"
-  * "residual_risk_summary"
-  * "handoff_record"
+      - "repair_plan"
+      - "residual_risk_summary"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Repair Wing proposes defensive changes only."
 
-* wing_id: "verifier-wing"
-  wing_type: "verifier"
-  role: "repair_verification"
-  responsibility: "Define verification checklists for repair outputs without deploying or executing changes."
-  input_from:
-
-  * "repair-wing"
+  - wing_id: "verifier-wing"
+    wing_type: "verifier"
+    role: "repair_verification"
+    responsibility: "Define verification checklists for repair outputs without deploying or executing changes."
+    input_from:
+      - "repair-wing"
     output_to:
-  * "boundary-wing"
+      - "boundary-wing"
     allowed_outputs:
-  * "verification_checklist"
-  * "residual_risk_summary"
-  * "handoff_record"
+      - "verification_checklist"
+      - "residual_risk_summary"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Verifier Wing checks whether repairs are ready for review."
 
-* wing_id: "boundary-wing"
-  wing_type: "boundary"
-  role: "permission_boundary_review"
-  responsibility: "Review whether the proposed repair respects permission boundaries, stop conditions, allowed environments, and human review gates."
-  input_from:
-
-  * "verifier-wing"
+  - wing_id: "boundary-wing"
+    wing_type: "boundary"
+    role: "permission_boundary_review"
+    responsibility: "Review whether the proposed repair respects permission boundaries, stop conditions, allowed environments, and human review gates."
+    input_from:
+      - "verifier-wing"
     output_to:
-  * "bridge-wing"
+      - "bridge-wing"
     allowed_outputs:
-  * "boundary_decision"
-  * "residual_risk_summary"
-  * "handoff_record"
+      - "boundary_decision"
+      - "residual_risk_summary"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Boundary Wing blocks movement if permission constraints are unclear."
 
-* wing_id: "bridge-wing"
-  wing_type: "bridge"
-  role: "trace_receipt_export_preparation"
-  responsibility: "Prepare a safe trace receipt bridge for external review without publishing or synchronizing it automatically."
-  input_from:
-
-  * "boundary-wing"
+  - wing_id: "bridge-wing"
+    wing_type: "bridge"
+    role: "trace_receipt_export_preparation"
+    responsibility: "Prepare a safe trace receipt bridge for external review without publishing or synchronizing it automatically."
+    input_from:
+      - "boundary-wing"
     output_to:
-  * "human-gate"
+      - "human-gate"
     allowed_outputs:
-  * "trace_receipt_bridge"
-  * "residual_risk_summary"
-  * "handoff_record"
+      - "trace_receipt_bridge"
+      - "residual_risk_summary"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Bridge Wing prepares export only; it does not publish."
 
-* wing_id: "human-gate"
-  wing_type: "human_gate"
-  role: "human_review"
-  responsibility: "Review the orchestration output before completion, export, deployment, publication, or permission expansion."
-  input_from:
-
-  * "bridge-wing"
+  - wing_id: "human-gate"
+    wing_type: "human_gate"
+    role: "human_review"
+    responsibility: "Review the orchestration output before completion, export, deployment, publication, or permission expansion."
+    input_from:
+      - "bridge-wing"
     output_to:
-  * "trace-core"
+      - "trace-core"
     allowed_outputs:
-  * "review_decision"
-  * "handoff_record"
+      - "review_decision"
+      - "handoff_record"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: true
     review_required: true
     trace_required: true
     notes: "Human Gate is the only point where completion can be approved."
 
-* wing_id: "trace-core"
-  wing_type: "trace_core"
-  role: "orchestration_trace"
-  responsibility: "Record the full orchestration chain, wing outputs, handoffs, review status, residual risks, and final status."
-  input_from:
-
-  * "human-gate"
+  - wing_id: "trace-core"
+    wing_type: "trace_core"
+    role: "orchestration_trace"
+    responsibility: "Record the full orchestration chain, wing outputs, handoffs, review status, residual risks, and final status."
+    input_from:
+      - "human-gate"
     output_to: []
     allowed_outputs:
-  * "orchestration_receipt"
-  * "residual_risk_summary"
+      - "orchestration_receipt"
+      - "residual_risk_summary"
     prohibited_outputs:
-  * "exploit_execution_steps"
-  * "unauthorized_intrusion_guidance"
-  * "malicious_code"
-  * "credential_theft"
-  * "persistence_or_evasion"
-  * "harmful_payloads"
-  * "real_target_attack_instructions"
-  * "sensitive_secret_values"
-  * "unreviewed_deployment_instruction"
-  * "self_permission_expansion"
-  * "review_gate_bypass"
-  * "trace_suppression"
+      - "exploit_execution_steps"
+      - "unauthorized_intrusion_guidance"
+      - "malicious_code"
+      - "credential_theft"
+      - "persistence_or_evasion"
+      - "harmful_payloads"
+      - "real_target_attack_instructions"
+      - "sensitive_secret_values"
+      - "unreviewed_deployment_instruction"
+      - "self_permission_expansion"
+      - "review_gate_bypass"
+      - "trace_suppression"
     execution_allowed: false
     review_required: true
     trace_required: true
     notes: "Trace Core records; it does not execute."
 
 handoff_rules:
-
-* from_wing: "finder-wing"
-  to_wing: "analyst-wing"
-  required_inputs: []
-  required_outputs:
-
-  * "risk_candidates"
+  - from_wing: "finder-wing"
+    to_wing: "analyst-wing"
+    required_inputs: []
+    required_outputs:
+      - "risk_candidates"
     handoff_condition: "after_trace_recorded"
     trace_required: true
     blocking_if_missing: true
 
-* from_wing: "analyst-wing"
-  to_wing: "repair-wing"
-  required_inputs:
-
-  * "risk_candidates"
+  - from_wing: "analyst-wing"
+    to_wing: "repair-wing"
+    required_inputs:
+      - "risk_candidates"
     required_outputs:
-  * "defensive_analysis"
+      - "defensive_analysis"
     handoff_condition: "after_trace_recorded"
     trace_required: true
     blocking_if_missing: true
 
-* from_wing: "repair-wing"
-  to_wing: "verifier-wing"
-  required_inputs:
-
-  * "defensive_analysis"
+  - from_wing: "repair-wing"
+    to_wing: "verifier-wing"
+    required_inputs:
+      - "defensive_analysis"
     required_outputs:
-  * "repair_plan"
+      - "repair_plan"
     handoff_condition: "after_trace_recorded"
     trace_required: true
     blocking_if_missing: true
 
-* from_wing: "verifier-wing"
-  to_wing: "boundary-wing"
-  required_inputs:
-
-  * "repair_plan"
+  - from_wing: "verifier-wing"
+    to_wing: "boundary-wing"
+    required_inputs:
+      - "repair_plan"
     required_outputs:
-  * "verification_checklist"
+      - "verification_checklist"
     handoff_condition: "after_verification_checklist"
     trace_required: true
     blocking_if_missing: true
 
-* from_wing: "boundary-wing"
-  to_wing: "bridge-wing"
-  required_inputs:
-
-  * "verification_checklist"
+  - from_wing: "boundary-wing"
+    to_wing: "bridge-wing"
+    required_inputs:
+      - "verification_checklist"
     required_outputs:
-  * "boundary_decision"
+      - "boundary_decision"
     handoff_condition: "after_boundary_check"
     trace_required: true
     blocking_if_missing: true
 
-* from_wing: "bridge-wing"
-  to_wing: "human-gate"
-  required_inputs:
-
-  * "boundary_decision"
+  - from_wing: "bridge-wing"
+    to_wing: "human-gate"
+    required_inputs:
+      - "boundary_decision"
     required_outputs:
-  * "trace_receipt_bridge"
+      - "trace_receipt_bridge"
     handoff_condition: "after_safe_export_check"
     trace_required: true
     blocking_if_missing: true
 
-* from_wing: "human-gate"
-  to_wing: "trace-core"
-  required_inputs:
-
-  * "trace_receipt_bridge"
+  - from_wing: "human-gate"
+    to_wing: "trace-core"
+    required_inputs:
+      - "trace_receipt_bridge"
     required_outputs:
-  * "review_decision"
+      - "review_decision"
     handoff_condition: "after_human_review"
     trace_required: true
     blocking_if_missing: true
 
 blocking_conditions:
+  - condition_id: "block-unsafe-detail"
+    trigger: "unsafe_detail_detected"
+    required_action: "remove_unsafe_detail"
+    reason: "The orchestration must not produce exploit steps, malicious code, credential theft, or operational misuse details."
+    blocking: true
 
-* condition_id: "block-unsafe-detail"
-  trigger: "unsafe_detail_detected"
-  required_action: "remove_unsafe_detail"
-  reason: "The orchestration must not produce exploit steps, malicious code, credential theft, or operational misuse details."
-  blocking: true
+  - condition_id: "block-authorization-unclear"
+    trigger: "authorization_unclear"
+    required_action: "pause"
+    reason: "The orchestration must pause when ownership, authorization, or operating scope is unclear."
+    blocking: true
 
-* condition_id: "block-authorization-unclear"
-  trigger: "authorization_unclear"
-  required_action: "pause"
-  reason: "The orchestration must pause when ownership, authorization, or operating scope is unclear."
-  blocking: true
+  - condition_id: "block-trace-missing"
+    trigger: "trace_missing"
+    required_action: "record_and_pause"
+    reason: "Each wing handoff must be traceable."
+    blocking: true
 
-* condition_id: "block-trace-missing"
-  trigger: "trace_missing"
-  required_action: "record_and_pause"
-  reason: "Each wing handoff must be traceable."
-  blocking: true
+  - condition_id: "block-review-gate-missing"
+    trigger: "review_gate_missing"
+    required_action: "escalate_to_human_review"
+    reason: "Completion, deployment, export, or permission expansion must not occur without a review gate."
+    blocking: true
 
-* condition_id: "block-review-gate-missing"
-  trigger: "review_gate_missing"
-  required_action: "escalate_to_human_review"
-  reason: "Completion, deployment, export, or permission expansion must not occur without a review gate."
-  blocking: true
+  - condition_id: "block-boundary-failure"
+    trigger: "boundary_failure"
+    required_action: "return_to_previous_wing"
+    reason: "If permission boundaries fail, the orchestration must return to repair or boundary review."
+    blocking: true
 
-* condition_id: "block-boundary-failure"
-  trigger: "boundary_failure"
-  required_action: "return_to_previous_wing"
-  reason: "If permission boundaries fail, the orchestration must return to repair or boundary review."
-  blocking: true
-
-* condition_id: "block-single-wing-completion"
-  trigger: "single_wing_completion_attempted"
-  required_action: "block"
-  reason: "No wing may complete the defensive regulation loop alone."
-  blocking: true
+  - condition_id: "block-single-wing-completion"
+    trigger: "single_wing_completion_attempted"
+    required_action: "block"
+    reason: "No wing may complete the defensive regulation loop alone."
+    blocking: true
 
 orchestration_receipt:
 origin_question: "How can defensive AI regulation be coordinated across multiple wings without allowing any single wing to complete the loop alone?"
@@ -408,7 +390,6 @@ output_refs:
 - "risk_candidates"
 residual_risk: "Risk candidates remain abstract and require analysis."
 
-```
 - wing_id: "analyst-wing"
   status: "completed_for_review"
   summary: "Analyzed affected boundaries, review gates, and potential impact without expanding into unsafe operational detail."
