@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/trace-bridge.schema.json",
+  "title": "Trace Bridge Record",
+  "description": "Bridge record for exporting internal regulation, repair, and boundary records into external trace receipt formats.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "schema_version",
+    "bridge_id",
+    "created_at",
+    "source_records",
+    "bridge_target",
+    "exported_fields",
+    "export_payload",
+    "regulation_summary",
+    "source_chain",
+    "repair_summary",
+    "permission_boundary_summary",
+    "review_summary",
+    "residual_risks",
+    "final_status",
+    "integrity_policy",
+    "safety_boundary",
+    "human_review"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.4.0"
+    },
+
+    "bridge_id": {
+      "type": "string"
+    },
+
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "source_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["record_type", "record_id", "schema_version", "summary"],
+        "properties": {
+          "record_type": { "type": "string" },
+          "record_id": { "type": "string" },
+          "schema_version": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+
+    "bridge_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_type", "compatible_with", "export_purpose"],
+      "properties": {
+        "target_type": { "type": "string" },
+        "compatible_with": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "export_purpose": { "type": "string" }
+      }
+    },
+
+    "exported_fields": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "export_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin_question", "target_summary"],
+      "properties": {
+        "origin_question": { "type": "string" },
+        "target_summary": { "type": "string" }
+      }
+    },
+
+    "regulation_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "principle"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "principle": { "type": "string" }
+      }
+    },
+
+    "source_chain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["record_type", "record_id", "schema_version", "summary"],
+        "properties": {
+          "record_type": { "type": "string" },
+          "record_id": { "type": "string" },
+          "schema_version": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+
+    "repair_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["loop_id", "stage_order", "repair_outputs", "verification_status"],
+      "properties": {
+        "loop_id": { "type": "string" },
+        "stage_order": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "repair_outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "verification_status": { "type": "string" }
+      }
+    },
+
+    "permission_boundary_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundary_id",
+        "autonomy_level",
+        "allowed_environment",
+        "self_permission_expansion_allowed",
+        "review_required",
+        "stop_conditions",
+        "review_gates"
+      ],
+      "properties": {
+        "boundary_id": { "type": "string" },
+        "autonomy_level": { "type": "string" },
+        "allowed_environment": { "type": "string" },
+        "self_permission_expansion_allowed": { "type": "boolean" },
+        "review_required": { "type": "boolean" },
+        "stop_conditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "review_gates": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "review_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_review_required",
+        "reviewer_role",
+        "review_before"
+      ],
+      "properties": {
+        "human_review_required": { "type": "boolean" },
+        "reviewer_role": { "type": "string" },
+        "review_before": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "residual_risks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "final_status": {
+      "type": "string"
+    },
+
+    "integrity_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_required",
+        "review_required",
+        "tamper_evidence_required",
+        "source_chain_required",
+        "hash_recommended",
+        "hash_method"
+      ],
+      "properties": {
+        "trace_required": { "type": "boolean" },
+        "review_required": { "type": "boolean" },
+        "tamper_evidence_required": { "type": "boolean" },
+        "source_chain_required": { "type": "boolean" },
+        "hash_recommended": { "type": "boolean" },
+        "hash_method": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "safety_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["export_must_not_include", "export_must_include"],
+      "properties": {
+        "export_must_not_include": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "export_must_include": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "human_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "review_gate", "reason", "reviewer_role"],
+      "properties": {
+        "required": { "type": "boolean" },
+        "review_gate": { "type": "string" },
+        "reason": { "type": "string" },
+        "reviewer_role": { "type": "string" }
+      }
+    }
+  }
+}
