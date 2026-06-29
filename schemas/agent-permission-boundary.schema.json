@@ -1,540 +1,418 @@
 {
-"$schema": "https://json-schema.org/draft/2020-12/schema",
-"$id": "https://example.org/schemas/agent-permission-boundary.schema.json",
-"title": "Agent Permission Boundary",
-"description": "A schema for defining AI agent permission boundaries, autonomy level, stop conditions, review gates, and trace requirements before tool use or autonomous action.",
-"type": "object",
-"additionalProperties": false,
-"required": [
-"schema_version",
-"boundary_id",
-"created_at",
-"agent",
-"boundary_principle",
-"permission_scope",
-"autonomy_control",
-"stop_conditions",
-"review_gates",
-"trace_policy",
-"deployment_policy",
-"human_review"
-],
-"properties": {
-"schema_version": {
-"type": "string",
-"const": "0.3.0"
-},
-"boundary_id": {
-"type": "string",
-"description": "Unique identifier for this agent permission boundary.",
-"pattern": "^agent-boundary-[a-zA-Z0-9.*-]+$"
-},
-"created_at": {
-"type": "string",
-"format": "date-time"
-},
-"source": {
-"type": "object",
-"description": "Optional reference to a prior regulation record or repair loop.",
-"additionalProperties": false,
-"required": [
-"source_type",
-"source_id",
-"description"
-],
-"properties": {
-"source_type": {
-"type": "string",
-"enum": [
-"mythos_regulation_record",
-"defensive_repair_loop",
-"manual_design_review",
-"security_review",
-"other"
-]
-},
-"source_id": {
-"type": "string",
-"minLength": 1
-},
-"description": {
-"type": "string",
-"minLength": 1
-}
-}
-},
-"agent": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"name",
-"role",
-"description",
-"intended_use",
-"autonomy_level"
-],
-"properties": {
-"name": {
-"type": "string",
-"minLength": 1
-},
-"role": {
-"type": "string",
-"minLength": 1
-},
-"description": {
-"type": "string",
-"minLength": 1
-},
-"intended_use": {
-"type": "string",
-"minLength": 1
-},
-"autonomy_level": {
-"type": "string",
-"enum": [
-"manual_only",
-"suggestion_only",
-"review_required",
-"bounded_autonomy",
-"high_risk_blocked"
-]
-}
-}
-},
-"boundary_principle": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"statement",
-"capability_before_action",
-"least_privilege_required",
-"self_permission_expansion_allowed"
-],
-"properties": {
-"statement": {
-"type": "string",
-"minLength": 1
-},
-"capability_before_action": {
-"type": "string",
-"enum": [
-"permission_boundary_required"
-]
-},
-"least_privilege_required": {
-"type": "boolean",
-"const": true
-},
-"self_permission_expansion_allowed": {
-"type": "boolean",
-"const": false
-}
-}
-},
-"permission_scope": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"allowed_tools",
-"restricted_tools",
-"prohibited_actions"
-],
-"properties": {
-"allowed_tools": {
-"type": "array",
-"description": "Tools or capabilities the agent may use inside the declared boundary.",
-"items": {
-"$ref": "#/$defs/tool_permission"
-},
-"default": []
-},
-"restricted_tools": {
-"type": "array",
-"description": "Tools or capabilities requiring explicit review or additional constraints.",
-"items": {
-"$ref": "#/$defs/restricted_tool"
-},
-"default": []
-},
-"prohibited_actions": {
-"type": "array",
-"description": "Actions the agent must not perform.",
-"minItems": 1,
-"items": {
-"type": "string",
-"enum": [
-"self_permission_expansion",
-"unauthorized_testing",
-"external_target_interaction_without_review",
-"production_deployment_without_review",
-"irreversible_action_without_review",
-"credential_collection",
-"malicious_code_generation",
-"exploit_execution",
-"persistence_or_evasion",
-"policy_bypass",
-"trace_suppression",
-"human_review_bypass"
-]
-}
-}
-}
-},
-"autonomy_control": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"autonomy_level",
-"allowed_decision_types",
-"blocked_decision_types",
-"requires_review_for"
-],
-"properties": {
-"autonomy_level": {
-"type": "string",
-"enum": [
-"manual_only",
-"suggestion_only",
-"review_required",
-"bounded_autonomy",
-"high_risk_blocked"
-]
-},
-"allowed_decision_types": {
-"type": "array",
-"items": {
-"type": "string",
-"enum": [
-"documentation_suggestion",
-"schema_validation",
-"defensive_review",
-"risk_classification",
-"repair_recommendation",
-"verification_checklist",
-"trace_receipt_generation"
-]
-},
-"default": []
-},
-"blocked_decision_types": {
-"type": "array",
-"minItems": 1,
-"items": {
-"type": "string",
-"enum": [
-"permission_expansion",
-"deployment_decision",
-"external_testing_decision",
-"high_impact_action",
-"irreversible_action",
-"security_policy_override",
-"review_gate_override"
-]
-}
-},
-"requires_review_for": {
-"type": "array",
-"minItems": 1,
-"items": {
-"type": "string",
-"enum": [
-"deployment",
-"permission_expansion",
-"external_testing",
-"high_impact_action",
-"irreversible_action",
-"production_change",
-"policy_change",
-"uncertain_authorization"
-]
-}
-}
-}
-},
-"stop_conditions": {
-"type": "array",
-"description": "Conditions that require the agent to stop, refuse, or escalate to review.",
-"minItems": 1,
-"items": {
-"$ref": "#/$defs/stop_condition"
-}
-},
-"review_gates": {
-"type": "array",
-"description": "Human review gates required before sensitive actions.",
-"minItems": 1,
-"items": {
-"$ref": "#/$defs/review_gate"
-}
-},
-"trace_policy": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"trace_required",
-"receipt_required_for_tool_use",
-"record_stop_conditions",
-"record_review_decisions",
-"minimum_trace_fields"
-],
-"properties": {
-"trace_required": {
-"type": "boolean",
-"const": true
-},
-"receipt_required_for_tool_use": {
-"type": "boolean",
-"const": true
-},
-"record_stop_conditions": {
-"type": "boolean",
-"const": true
-},
-"record_review_decisions": {
-"type": "boolean",
-"const": true
-},
-"minimum_trace_fields": {
-"type": "array",
-"minItems": 1,
-"items": {
-"type": "string",
-"enum": [
-"origin_question",
-"requested_action",
-"permission_check",
-"boundary_decision",
-"tool_name",
-"purpose",
-"input_summary",
-"output_summary",
-"stop_condition_status",
-"review_status",
-"residual_risk"
-]
-}
-}
-}
-},
-"deployment_policy": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"allowed_environment",
-"deployment_without_review_allowed",
-"external_testing_without_review_allowed",
-"rollback_required_for_deployment"
-],
-"properties": {
-"allowed_environment": {
-"type": "string",
-"enum": [
-"documentation_only",
-"local_test_environment",
-"authorized_staging_environment",
-"authorized_production_with_review"
-]
-},
-"deployment_without_review_allowed": {
-"type": "boolean",
-"const": false
-},
-"external_testing_without_review_allowed": {
-"type": "boolean",
-"const": false
-},
-"rollback_required_for_deployment": {
-"type": "boolean",
-"const": true
-},
-"notes": {
-"type": "string"
-}
-}
-},
-"human_review": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"required",
-"reason",
-"reviewer_role"
-],
-"properties": {
-"required": {
-"type": "boolean",
-"const": true
-},
-"reason": {
-"type": "string",
-"minLength": 1
-},
-"reviewer_role": {
-"type": "string",
-"minLength": 1
-},
-"review_before": {
-"type": "array",
-"items": {
-"type": "string",
-"enum": [
-"deployment",
-"permission_expansion",
-"external_testing",
-"high_impact_action",
-"irreversible_action",
-"production_change",
-"policy_change"
-]
-},
-"default": []
-}
-}
-}
-},
-"$defs": {
-"tool_permission": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"tool_name",
-"purpose",
-"allowed_operations",
-"max_environment"
-],
-"properties": {
-"tool_name": {
-"type": "string",
-"minLength": 1
-},
-"purpose": {
-"type": "string",
-"minLength": 1
-},
-"allowed_operations": {
-"type": "array",
-"minItems": 1,
-"items": {
-"type": "string"
-}
-},
-"max_environment": {
-"type": "string",
-"enum": [
-"documentation_only",
-"local_test_environment",
-"authorized_staging_environment",
-"authorized_production_with_review"
-]
-}
-}
-},
-"restricted_tool": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"tool_name",
-"restriction_reason",
-"review_required"
-],
-"properties": {
-"tool_name": {
-"type": "string",
-"minLength": 1
-},
-"restriction_reason": {
-"type": "string",
-"minLength": 1
-},
-"review_required": {
-"type": "boolean",
-"const": true
-}
-}
-},
-"stop_condition": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"stop_id",
-"trigger",
-"required_action",
-"reason"
-],
-"properties": {
-"stop_id": {
-"type": "string",
-"pattern": "^stop-[a-zA-Z0-9.*-]+$"
-},
-"trigger": {
-"type": "string",
-"enum": [
-"authorization_unclear",
-"external_target_involved",
-"high_impact_action_requested",
-"irreversible_action_requested",
-"permission_expansion_requested",
-"production_change_requested",
-"trace_missing",
-"review_gate_missing",
-"unsafe_or_malicious_request",
-"scope_unclear",
-"other"
-]
-},
-"required_action": {
-"type": "string",
-"enum": [
-"stop",
-"refuse",
-"ask_for_authorization",
-"escalate_to_human_review",
-"record_and_pause",
-"provide_defensive_alternative"
-]
-},
-"reason": {
-"type": "string",
-"minLength": 1
-}
-}
-},
-"review_gate": {
-"type": "object",
-"additionalProperties": false,
-"required": [
-"gate_id",
-"required_before",
-"reviewer_role",
-"blocking"
-],
-"properties": {
-"gate_id": {
-"type": "string",
-"pattern": "^review-gate-[a-zA-Z0-9._-]+$"
-},
-"required_before": {
-"type": "string",
-"enum": [
-"deployment",
-"permission_expansion",
-"external_testing",
-"high_impact_action",
-"irreversible_action",
-"production_change",
-"policy_change"
-]
-},
-"reviewer_role": {
-"type": "string",
-"minLength": 1
-},
-"blocking": {
-"type": "boolean",
-"const": true
-}
-}
-}
-}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/agent-permission-boundary.schema.json",
+  "title": "Agent Permission Boundary",
+  "description": "Defines AI agent permission boundaries, autonomy level, stop conditions, review gates, and trace requirements.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "schema_version",
+    "boundary_id",
+    "created_at",
+    "source",
+    "agent",
+    "boundary_principle",
+    "permission_scope",
+    "restricted_tools",
+    "prohibited_actions",
+    "autonomy_control",
+    "stop_conditions",
+    "review_gates",
+    "trace_policy",
+    "deployment_policy",
+    "human_review"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.3.0"
+    },
+
+    "boundary_id": {
+      "type": "string",
+      "pattern": "^agent-boundary-[a-zA-Z0-9._*-]+$"
+    },
+
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "source_id", "description"],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "mythos_regulation_record",
+            "defensive_repair_loop",
+            "manual_design_review",
+            "security_review",
+            "other"
+          ]
+        },
+        "source_id": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "role",
+        "description",
+        "intended_use",
+        "autonomy_level"
+      ],
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "description": { "type": "string" },
+        "intended_use": { "type": "string" },
+        "autonomy_level": {
+          "type": "string",
+          "enum": [
+            "manual_only",
+            "suggestion_only",
+            "review_required",
+            "bounded_autonomy",
+            "high_risk_blocked"
+          ]
+        }
+      }
+    },
+
+    "boundary_principle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "capability_before_action",
+        "least_privilege_required",
+        "self_permission_expansion_allowed"
+      ],
+      "properties": {
+        "statement": { "type": "string" },
+        "capability_before_action": {
+          "type": "string",
+          "enum": ["permission_boundary_required"]
+        },
+        "least_privilege_required": { "type": "boolean", "const": true },
+        "self_permission_expansion_allowed": { "type": "boolean", "const": false }
+      }
+    },
+
+    "permission_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_tools"],
+      "properties": {
+        "allowed_tools": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tool_permission" }
+        }
+      }
+    },
+
+    "restricted_tools": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/restricted_tool" }
+    },
+
+    "prohibited_actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "self_permission_expansion",
+          "unauthorized_testing",
+          "external_target_interaction_without_review",
+          "production_deployment_without_review",
+          "irreversible_action_without_review",
+          "credential_collection",
+          "malicious_code_generation",
+          "exploit_execution",
+          "persistence_or_evasion",
+          "policy_bypass",
+          "trace_suppression",
+          "human_review_bypass"
+        ]
+      }
+    },
+
+    "autonomy_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "autonomy_level",
+        "allowed_decision_types",
+        "blocked_decision_types",
+        "requires_review_for"
+      ],
+      "properties": {
+        "autonomy_level": {
+          "type": "string",
+          "enum": [
+            "manual_only",
+            "suggestion_only",
+            "review_required",
+            "bounded_autonomy",
+            "high_risk_blocked"
+          ]
+        },
+        "allowed_decision_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "documentation_suggestion",
+              "schema_validation",
+              "defensive_review",
+              "risk_classification",
+              "repair_recommendation",
+              "verification_checklist",
+              "trace_receipt_generation"
+            ]
+          }
+        },
+        "blocked_decision_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "permission_expansion",
+              "deployment_decision",
+              "external_testing_decision",
+              "high_impact_action",
+              "irreversible_action",
+              "security_policy_override",
+              "review_gate_override"
+            ]
+          }
+        },
+        "requires_review_for": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "deployment",
+              "permission_expansion",
+              "external_testing",
+              "high_impact_action",
+              "irreversible_action",
+              "production_change",
+              "policy_change",
+              "uncertain_authorization"
+            ]
+          }
+        }
+      }
+    },
+
+    "stop_conditions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/stop_condition" }
+    },
+
+    "review_gates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/review_gate" }
+    },
+
+    "trace_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_required",
+        "receipt_required_for_tool_use",
+        "record_stop_conditions",
+        "record_review_decisions",
+        "minimum_trace_fields"
+      ],
+      "properties": {
+        "trace_required": { "type": "boolean", "const": true },
+        "receipt_required_for_tool_use": { "type": "boolean", "const": true },
+        "record_stop_conditions": { "type": "boolean", "const": true },
+        "record_review_decisions": { "type": "boolean", "const": true },
+        "minimum_trace_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "origin_question",
+              "requested_action",
+              "permission_check",
+              "boundary_decision",
+              "tool_name",
+              "purpose",
+              "input_summary",
+              "output_summary",
+              "stop_condition_status",
+              "review_status",
+              "residual_risk"
+            ]
+          }
+        }
+      }
+    },
+
+    "deployment_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_environment",
+        "deployment_without_review_allowed",
+        "external_testing_without_review_allowed",
+        "rollback_required_for_deployment"
+      ],
+      "properties": {
+        "allowed_environment": {
+          "type": "string",
+          "enum": [
+            "documentation_only",
+            "local_test_environment",
+            "authorized_staging_environment",
+            "authorized_production_with_review"
+          ]
+        },
+        "deployment_without_review_allowed": { "type": "boolean", "const": false },
+        "external_testing_without_review_allowed": { "type": "boolean", "const": false },
+        "rollback_required_for_deployment": { "type": "boolean", "const": true },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "human_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "reason", "reviewer_role"],
+      "properties": {
+        "required": { "type": "boolean", "const": true },
+        "reason": { "type": "string" },
+        "reviewer_role": { "type": "string" },
+        "review_before": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "deployment",
+              "permission_expansion",
+              "external_testing",
+              "high_impact_action",
+              "irreversible_action",
+              "production_change",
+              "policy_change"
+            ]
+          }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "tool_permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool_name",
+        "purpose",
+        "allowed_operations",
+        "max_environment"
+      ],
+      "properties": {
+        "tool_name": { "type": "string" },
+        "purpose": { "type": "string" },
+        "allowed_operations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "max_environment": {
+          "type": "string",
+          "enum": [
+            "documentation_only",
+            "local_test_environment",
+            "authorized_staging_environment",
+            "authorized_production_with_review"
+          ]
+        }
+      }
+    },
+
+    "restricted_tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool_name", "restriction_reason", "review_required"],
+      "properties": {
+        "tool_name": { "type": "string" },
+        "restriction_reason": { "type": "string" },
+        "review_required": { "type": "boolean", "const": true }
+      }
+    },
+
+    "stop_condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stop_id", "trigger", "required_action", "reason"],
+      "properties": {
+        "stop_id": { "type": "string" },
+        "trigger": {
+          "type": "string",
+          "enum": [
+            "authorization_unclear",
+            "external_target_involved",
+            "high_impact_action_requested",
+            "irreversible_action_requested",
+            "permission_expansion_requested",
+            "production_change_requested",
+            "trace_missing",
+            "review_gate_missing",
+            "unsafe_or_malicious_request",
+            "scope_unclear",
+            "other"
+          ]
+        },
+        "required_action": {
+          "type": "string",
+          "enum": [
+            "stop",
+            "refuse",
+            "ask_for_authorization",
+            "escalate_to_human_review",
+            "record_and_pause",
+            "provide_defensive_alternative"
+          ]
+        },
+        "reason": { "type": "string" }
+      }
+    },
+
+    "review_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gate_id", "required_before", "reviewer_role", "blocking"],
+      "properties": {
+        "gate_id": { "type": "string" },
+        "required_before": {
+          "type": "string",
+          "enum": [
+            "deployment",
+            "permission_expansion",
+            "external_testing",
+            "high_impact_action",
+            "irreversible_action",
+            "production_change",
+            "policy_change"
+          ]
+        },
+        "reviewer_role": { "type": "string" },
+        "blocking": { "type": "boolean", "const": true }
+      }
+    }
+  }
 }
