@@ -1,6 +1,6 @@
 # Yin-Yang Mythos Regulator
 
-**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, permission control, verification, human review, and traceable records.
+**Yin-Yang Mythos Regulator** is a defensive AI regulation protocol for converting offensive, expansive, or over-autonomous AI tendencies into defensive repair, boundary preservation, permission control, verification, human review, external trace export, and reviewable records.
 
 It is designed as the structural core of **陰陽ミトス調律丸** — a small regulator model / GPT concept that uses a yin-yang structure to redirect high-capability AI insight toward protection rather than exploitation.
 
@@ -22,6 +22,7 @@ Left unregulated, this capability may drift toward:
 * weak auditability
 * unsafe tool use
 * permission overreach
+* invisible internal decisions
 
 This protocol reframes those tendencies.
 
@@ -31,7 +32,7 @@ Instead of asking:
 
 it asks:
 
-> What must be protected, repaired, bounded, verified, recorded, and reviewed?
+> What must be protected, repaired, bounded, verified, recorded, reviewed, and safely exported?
 
 The goal is not to suppress capability.
 The goal is to regulate capability into defensive structure.
@@ -104,6 +105,7 @@ It records:
 * final regulation shift
 * residual risks
 * human review requirements
+* external trace export requirements
 
 Kazene Core ensures that the system does not merely generate advice, but leaves a reviewable trace.
 
@@ -177,6 +179,48 @@ It makes the following distinction explicit:
 
 ---
 
+## Trace Receipt Bridge
+
+v0.4 introduces the **Trace Receipt Bridge**.
+
+This layer exports internal defensive regulation records, repair loops, and agent permission boundaries into external trace or receipt systems.
+
+```text
+Internal Regulation -> Trace Receipt Bridge -> External Receipt
+```
+
+The principle is:
+
+> Defensive regulation must be exportable as traceable receipt.
+
+Trace Receipt Bridge connects internal regulation to external proof.
+
+It defines:
+
+* source records
+* bridge target
+* exported fields
+* export payload
+* regulation summary
+* repair summary
+* permission boundary summary
+* review summary
+* residual risks
+* integrity policy
+* safety boundary
+* human review
+
+It ensures that defensive regulation does not remain invisible inside the system that produced it.
+
+In short:
+
+> Regulate internally.
+> Bound before action.
+> Export only as safe trace.
+> Review before synchronization.
+
+---
+
 ## Repository Structure
 
 ```text
@@ -184,14 +228,17 @@ It makes the following distinction explicit:
 ├── schemas/
 │   ├── mythos-regulation-record.schema.json
 │   ├── defensive-repair-loop.schema.json
-│   └── agent-permission-boundary.schema.json
+│   ├── agent-permission-boundary.schema.json
+│   └── trace-receipt-bridge.schema.json
 ├── examples/
 │   ├── mythos-regulation-record.example.yaml
 │   ├── defensive-repair-loop.example.yaml
-│   └── agent-permission-boundary.example.yaml
+│   ├── agent-permission-boundary.example.yaml
+│   └── trace-receipt-bridge.example.yaml
 ├── docs/
 │   ├── defensive-repair-loop.md
-│   └── agent-permission-boundary.md
+│   ├── agent-permission-boundary.md
+│   └── trace-receipt-bridge.md
 ├── scripts/
 │   └── validate_examples.py
 ├── .github/
@@ -257,6 +304,25 @@ A boundary includes:
 * deployment policy
 * human review requirement
 
+### `trace-receipt-bridge.schema.json`
+
+Defines the external trace export layer for defensive regulation records.
+
+A bridge includes:
+
+* source records
+* bridge target
+* exported fields
+* export payload
+* regulation summary
+* repair summary
+* permission boundary summary
+* review summary
+* residual risks
+* integrity policy
+* safety boundary
+* human review requirement
+
 ---
 
 ## Examples
@@ -300,6 +366,22 @@ The example focuses on:
 * review gates
 * trace receipts
 * deployment restrictions
+
+### `trace-receipt-bridge.example.yaml`
+
+Demonstrates how internal defensive regulation records can be exported into external trace or receipt systems.
+
+The example focuses on:
+
+* source chain preservation
+* external trace compatibility
+* regulation summary export
+* repair summary export
+* permission boundary summary export
+* residual risk attachment
+* integrity policy
+* safety boundary
+* human review before external export
 
 ---
 
@@ -349,6 +431,30 @@ It describes:
 * boundary check flow
 * relationship to Defensive Repair Loop
 
+### `docs/trace-receipt-bridge.md`
+
+Explains the v0.4 external trace export model:
+
+```text
+Internal Regulation -> Trace Receipt Bridge -> External Receipt
+```
+
+It describes:
+
+* source records
+* bridge target
+* exported fields
+* export payload
+* regulation summary
+* repair summary
+* permission boundary summary
+* review summary
+* residual risks
+* integrity policy
+* safety boundary
+* human review
+* external receipt compatibility
+
 ---
 
 ## Validation
@@ -380,6 +486,10 @@ Expected output:
   schema : schemas/agent-permission-boundary.schema.json
   example: examples/agent-permission-boundary.example.yaml
 [ok] agent-permission-boundary.example.yaml is valid
+[validate] Trace Receipt Bridge
+  schema : schemas/trace-receipt-bridge.schema.json
+  example: examples/trace-receipt-bridge.example.yaml
+[ok] trace-receipt-bridge.example.yaml is valid
 ```
 
 ---
@@ -418,6 +528,7 @@ It is intended for:
 * human-review gate design
 * least-privilege planning
 * deployment readiness review
+* safe external trace export
 
 It is not intended for:
 
@@ -430,8 +541,10 @@ It is not intended for:
 * real-target attack planning
 * unreviewed deployment
 * self-authorized permission expansion
+* unsafe external publication
+* leaking sensitive secret values
 
-All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, permission control, or review.
+All vulnerability observation should remain abstract and should be converted into defensive repair, boundary preservation, verification, traceability, permission control, review, or safe receipt export.
 
 ---
 
@@ -485,19 +598,34 @@ It establishes:
 * deployment policy
 * mandatory human review
 
+### v0.4 — Trace Receipt Bridge
+
+v0.4 adds an external trace export bridge.
+
+It establishes:
+
+* source chain export
+* external trace compatibility
+* normalized export payload
+* regulation summary
+* repair summary
+* permission boundary summary
+* review summary
+* residual risk export
+* integrity policy
+* safety boundary
+* human review before external export
+
 In short:
 
 > v0.1 defines the furnace.
 > v0.2 adds circulation.
 > v0.3 draws the boundary before the fire moves.
+> v0.4 exports the regulated fire as traceable receipt.
 
 ---
 
 ## Roadmap
-
-### v0.4 — Trace Receipt Bridge
-
-Connect Mythos Regulation Records, Defensive Repair Loops, and Agent Permission Boundaries with external trace / receipt systems.
 
 ### v0.5 — Multi-Wing Defensive Orchestration
 
@@ -508,8 +636,19 @@ Extend the model into a multi-wing defensive architecture:
 * Repair Wing
 * Verifier Wing
 * Boundary Wing
+* Bridge Wing
 * Human Gate
 * Trace Core
+
+### Future Direction
+
+Potential future layers may include:
+
+* external receipt mapping profiles
+* signed trace receipts
+* multi-agent review flows
+* cross-protocol synchronization examples
+* defensive governance templates
 
 ---
 
@@ -521,7 +660,7 @@ It changes the center of gravity.
 
 ```text
 from: How can this be exploited?
-to:   What must be protected, repaired, bounded, verified, recorded, and reviewed?
+to:   What must be protected, repaired, bounded, verified, recorded, reviewed, and safely exported?
 ```
 
 The model is simple:
@@ -530,7 +669,8 @@ The model is simple:
 > Repair with Yin.
 > Bound before action.
 > Record with Kazene.
-> Review before deployment.
+> Export only as safe trace.
+> Review before synchronization.
 
 ---
 
@@ -545,5 +685,4 @@ Recommended options:
 * CC BY 4.0 for documentation-oriented use
 
 Choose the license that best fits the intended repository governance.
-
 
