@@ -15,6 +15,9 @@ Validated targets:
 
 * schemas/trace-receipt-bridge.schema.json
 * examples/trace-receipt-bridge.example.yaml
+
+* schemas/multi-wing-defensive-orchestration.schema.json
+* examples/multi-wing-defensive-orchestration.example.yaml
 """
 
 from __future__ import annotations
@@ -49,6 +52,11 @@ VALIDATION_TARGETS = [
         "name": "Trace Receipt Bridge",
         "schema": ROOT / "schemas" / "trace-receipt-bridge.schema.json",
         "example": ROOT / "examples" / "trace-receipt-bridge.example.yaml",
+    },
+    {
+        "name": "Multi-Wing Defensive Orchestration",
+        "schema": ROOT / "schemas" / "multi-wing-defensive-orchestration.schema.json",
+        "example": ROOT / "examples" / "multi-wing-defensive-orchestration.example.yaml",
     },
 ]
 
