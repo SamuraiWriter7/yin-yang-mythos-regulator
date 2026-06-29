@@ -10,9 +10,147 @@ This project follows a lightweight pre-release structure during early protocol f
 
 ### Planned
 
-* Add Trace Receipt Bridge documentation.
 * Add Multi-Wing Defensive Orchestration model.
+* Add external receipt mapping profiles.
 * Add more examples for agent design, workflow review, system prompt regulation, tool permission review, and trace receipt integration.
+
+---
+
+## [0.4.0-candidate] - 2026-06-29
+
+### Added
+
+* Added `schemas/trace-receipt-bridge.schema.json`.
+* Added `examples/trace-receipt-bridge.example.yaml`.
+* Added `docs/trace-receipt-bridge.md`.
+* Updated `scripts/validate_examples.py` to validate v0.1, v0.2, v0.3, and v0.4 examples.
+* Updated `README.md` with v0.4 Trace Receipt Bridge documentation.
+* Updated `CHANGELOG.md` with v0.4 candidate notes.
+
+### Defined
+
+* Defined the **Trace Receipt Bridge** as the v0.4 external trace export layer.
+
+* Defined the core bridge sequence:
+
+  ```text
+  Internal Regulation -> Trace Receipt Bridge -> External Receipt
+  ```
+
+* Defined the main bridge principle:
+
+  > Defensive regulation must be exportable as traceable receipt.
+
+* Defined source record support:
+
+  * `mythos_regulation_record`
+  * `defensive_repair_loop`
+  * `agent_permission_boundary`
+  * `trace_receipt_bridge`
+  * `other`
+
+* Defined bridge target support:
+
+  * `external_trace_receipt`
+  * `audit_record`
+  * `provenance_record`
+  * `royalty_record`
+  * `memory_record`
+  * `other`
+
+* Defined external compatibility options:
+
+  * `ai_search_trace_receipt`
+  * `kazene_trace_receipt`
+  * `synchronization_audit_protocol`
+  * `origin_structure_market`
+  * `royalty_hook`
+  * `memory_breathing_protocol`
+  * `other`
+
+* Defined exported field support:
+
+  * origin question
+  * target summary
+  * regulation shift
+  * repair loop summary
+  * permission boundary summary
+  * stop conditions
+  * review gates
+  * trace policy
+  * human review
+  * residual risks
+  * final status
+  * source chain
+  * safety boundary
+
+* Defined normalized export payload:
+
+  * origin question
+  * target summary
+  * regulation summary
+  * source chain
+  * repair summary
+  * permission boundary summary
+  * review summary
+  * residual risks
+  * final status
+
+* Defined integrity policy:
+
+  * trace required
+  * review required
+  * tamper evidence required
+  * source chain required
+  * hash recommended
+  * hash method declaration
+
+* Defined safety boundary requirements:
+
+  * exported records must not include offensive execution details
+  * exported records must not include unauthorized intrusion guidance
+  * exported records must not include malicious code
+  * exported records must not include credential theft
+  * exported records must not include sensitive secret values
+  * exported records must include defensive context
+  * exported records must include source chain
+  * exported records must include review status
+  * exported records must include residual risk
+  * exported records must include human review requirements
+
+* Defined human review gates before:
+
+  * external export
+  * publication
+  * cross-protocol synchronization
+  * deployment
+  * always
+
+### Philosophy
+
+* Extended the v0.1 principle:
+
+  > Offensive insight is not executed; it is regulated into defensive repair.
+
+* Extended the v0.2 principle:
+
+  > Defensive repair is not a one-time answer; it is a traceable loop.
+
+* Extended the v0.3 principle:
+
+  > Capability must pass through permission boundaries before action.
+
+* Added the v0.4 principle:
+
+  > Defensive regulation must be exportable as traceable receipt.
+
+### Notes
+
+* v0.1 defines the furnace.
+* v0.2 adds circulation.
+* v0.3 draws the boundary before the fire moves.
+* v0.4 exports the regulated fire as traceable receipt.
+* The protocol now covers regulation records, defensive repair loops, agent permission boundaries, and external trace receipt bridges.
 
 ---
 
@@ -307,4 +445,11 @@ This project follows a lightweight pre-release structure during early protocol f
 * Promote `0.3.0-candidate` to `0.3.0` after validation and review.
 * Use v0.3 as the baseline for the Agent Permission Boundary layer.
 
+---
 
+## [0.4.0] - Pending
+
+### Expected
+
+* Promote `0.4.0-candidate` to `0.4.0` after validation and review.
+* Use v0.4 as the baseline for the Trace Receipt Bridge layer.
