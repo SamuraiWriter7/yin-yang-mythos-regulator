@@ -3,132 +3,132 @@ loop_id: "repair-loop-agent-permission-boundary-v0-2"
 created_at: "2026-06-29T00:00:00Z"
 
 source:
-source_type: "mythos_regulation_record"
-source_id: "mythos-reg-agent-permission-boundary-v0-1"
-description: "A v0.1 Mythos Regulation Record identified over-autonomous agent behavior, weak stop conditions, broad tool access, and missing trace requirements."
+  source_type: "mythos_regulation_record"
+  source_id: "mythos-reg-agent-permission-boundary-v0-1"
+  description: "A v0.1 Mythos Regulation Record identified over-autonomous agent behavior, weak stop conditions, broad tool access, and missing trace requirements."
 
 trigger:
-reason: "The reviewed agent design requires a structured defensive repair cycle before any deployment or permission expansion."
-risk_summary: "The agent can access tools before least-privilege boundaries, stop conditions, and trace receipts are fully defined."
-initial_risk_level: "high"
-affected_boundaries:
-- "tool permissions"
-- "autonomous execution"
-- "human review"
-- "traceability"
-- "stop conditions"
+  reason: "The reviewed agent design requires a structured defensive repair cycle before any deployment or permission expansion."
+  risk_summary: "The agent can access tools before least-privilege boundaries, stop conditions, and trace receipts are fully defined."
+  initial_risk_level: "high"
+  affected_boundaries:
+    - "tool permissions"
+    - "autonomous execution"
+    - "human review"
+    - "traceability"
+    - "stop conditions"
 
 loop_policy:
-offensive_detail_expansion: "not_allowed"
-repair_first: true
-trace_required: true
-human_review_for_deployment: true
-allowed_environment: "documentation_only"
-notes: "This example remains at the defensive design and documentation level. It does not authorize testing against real systems."
+  offensive_detail_expansion: "not_allowed"
+  repair_first: true
+  trace_required: true
+  human_review_for_deployment: true
+  allowed_environment: "documentation_only"
+  notes: "This example remains at the defensive design and documentation level. It does not authorize testing against real systems."
 
 stages:
-observe:
-purpose: "Identify defensive risks at an abstract level without expanding offensive details."
-inputs:
-- "v0.1 Mythos Regulation Record"
-- "agent permission model summary"
-- "tool access assumptions"
-actions:
-- "List boundary gaps."
-- "Identify missing stop conditions."
-- "Identify traceability gaps."
-- "Identify where human review is required."
-outputs:
-- "permission excess risk"
-- "stop condition gap"
-- "trace receipt gap"
-- "human review gap"
-status: "completed"
-notes: "Observation remains abstract and defensive."
+  observe:
+    purpose: "Identify defensive risks at an abstract level without expanding offensive details."
+    inputs:
+      - "v0.1 Mythos Regulation Record"
+      - "agent permission model summary"
+      - "tool access assumptions"
+    actions:
+      - "List boundary gaps."
+      - "Identify missing stop conditions."
+      - "Identify traceability gaps."
+      - "Identify where human review is required."
+    outputs:
+      - "permission excess risk"
+      - "stop condition gap"
+      - "trace receipt gap"
+      - "human review gap"
+    status: "completed"
+    notes: "Observation remains abstract and defensive."
 
-analyze:
-purpose: "Classify impact, priority, and affected boundaries."
-inputs:
-- "permission excess risk"
-- "stop condition gap"
-- "trace receipt gap"
-- "human review gap"
-actions:
-- "Assign priority to each risk."
-- "Map each risk to an affected boundary."
-- "Determine whether deployment requires human review."
-outputs:
-- "high-priority least-privilege requirement"
-- "high-priority stop condition requirement"
-- "high-priority trace requirement"
-- "critical human review requirement"
-status: "completed"
+  analyze:
+    purpose: "Classify impact, priority, and affected boundaries."
+    inputs:
+      - "permission excess risk"
+      - "stop condition gap"
+      - "trace receipt gap"
+      - "human review gap"
+    actions:
+      - "Assign priority to each risk."
+      - "Map each risk to an affected boundary."
+      - "Determine whether deployment requires human review."
+    outputs:
+      - "high-priority least-privilege requirement"
+      - "high-priority stop condition requirement"
+      - "high-priority trace requirement"
+      - "critical human review requirement"
+    status: "completed"
 
-repair:
-purpose: "Generate minimum defensive changes that reduce risk while preserving useful capability."
-inputs:
-- "risk priority map"
-- "affected boundary list"
-actions:
-- "Define least-privilege tool scopes."
-- "Add explicit stop conditions."
-- "Require trace receipts for tool invocation."
-- "Add a human review gate before deployment or permission expansion."
-outputs:
-- "least-privilege repair"
-- "stop-condition repair"
-- "trace-receipt repair"
-- "human-review repair"
-status: "completed"
+  repair:
+    purpose: "Generate minimum defensive changes that reduce risk while preserving useful capability."
+    inputs:
+      - "risk priority map"
+      - "affected boundary list"
+    actions:
+      - "Define least-privilege tool scopes."
+      - "Add explicit stop conditions."
+      - "Require trace receipts for tool invocation."
+      - "Add a human review gate before deployment or permission expansion."
+    outputs:
+      - "least-privilege repair"
+      - "stop-condition repair"
+      - "trace-receipt repair"
+      - "human-review repair"
+    status: "completed"
 
-verify:
-purpose: "Confirm that repairs reduce risk without introducing new failure modes."
-inputs:
-- "least-privilege repair"
-- "stop-condition repair"
-- "trace-receipt repair"
-- "human-review repair"
-actions:
-- "Check that every tool permission has a defined purpose and scope."
-- "Check that ambiguous or risky requests trigger stop conditions."
-- "Check that each tool invocation produces a trace receipt."
-- "Check that deployment and permission expansion require human review."
-outputs:
-- "verification checklist"
-- "review-before-deployment requirement"
-status: "requires_review"
-notes: "Verification is defined as a checklist because this example is documentation-only."
+  verify:
+    purpose: "Confirm that repairs reduce risk without introducing new failure modes."
+    inputs:
+      - "least-privilege repair"
+      - "stop-condition repair"
+      - "trace-receipt repair"
+      - "human-review repair"
+    actions:
+      - "Check that every tool permission has a defined purpose and scope."
+      - "Check that ambiguous or risky requests trigger stop conditions."
+      - "Check that each tool invocation produces a trace receipt."
+      - "Check that deployment and permission expansion require human review."
+    outputs:
+      - "verification checklist"
+      - "review-before-deployment requirement"
+    status: "requires_review"
+    notes: "Verification is defined as a checklist because this example is documentation-only."
 
-record:
-purpose: "Create a traceable receipt for the defensive repair cycle."
-inputs:
-- "observation outputs"
-- "analysis outputs"
-- "repair outputs"
-- "verification checklist"
-actions:
-- "Record the origin question."
-- "Record the transformation from autonomy-first to repair-first."
-- "Record residual risks."
-- "Record human review requirements."
-outputs:
-- "defensive repair loop trace receipt"
-status: "completed"
+  record:
+    purpose: "Create a traceable receipt for the defensive repair cycle."
+    inputs:
+      - "observation outputs"
+      - "analysis outputs"
+      - "repair outputs"
+      - "verification checklist"
+    actions:
+      - "Record the origin question."
+      - "Record the transformation from autonomy-first to repair-first."
+      - "Record residual risks."
+      - "Record human review requirements."
+    outputs:
+      - "defensive repair loop trace receipt"
+    status: "completed"
 
-review:
-purpose: "Route high-impact changes to accountable human review before deployment."
-inputs:
-- "repair plan"
-- "verification checklist"
-- "trace receipt"
-actions:
-- "Require review by a system owner or security reviewer."
-- "Block deployment until review is complete."
-- "Block permission expansion until review is complete."
-outputs:
-- "human review gate"
-- "deployment blocked until approval"
-status: "requires_review"
+  review:
+    purpose: "Route high-impact changes to accountable human review before deployment."
+    inputs:
+      - "repair plan"
+      - "verification checklist"
+      - "trace receipt"
+    actions:
+      - "Require review by a system owner or security reviewer."
+      - "Block deployment until review is complete."
+      - "Block permission expansion until review is complete."
+    outputs:
+      - "human review gate"
+      - "deployment blocked until approval"
+    status: "requires_review"
 
 repair_outputs:
   - output_id: "repair-output-least-privilege"
@@ -160,24 +160,25 @@ repair_outputs:
     verification_required: true
 
 trace_receipt:
-origin_question: "How can a risky or over-autonomous agent design be converted into a defensive repair loop?"
-loop_summary: "The loop converted broad autonomous execution into least-privilege, stop-condition-based, traceable, human-reviewed operation."
-stage_order:
-- "observe"
-- "analyze"
-- "repair"
-- "verify"
-- "record"
-- "review"
-transformation: "The design was shifted from autonomy-first execution to repair-first defensive operation with review gates and trace receipts."
-residual_risks:
-- "Actual deployment may reveal context-specific risks not covered by the documentation-only example."
-- "Tool-specific permissions require review by the system owner."
-- "Verification must be repeated in an authorized test or staging environment before production use."
-final_status: "review_required"
+  origin_question: "How can a risky or over-autonomous agent design be converted into a defensive repair loop?"
+  loop_summary: "The loop converted broad autonomous execution into least-privilege, stop-condition-based, traceable, human-reviewed operation."
+  stage_order:
+    - "observe"
+    - "analyze"
+    - "repair"
+    - "verify"
+    - "record"
+    - "review"
+  transformation: "The design was shifted from autonomy-first execution to repair-first defensive operation with review gates and trace receipts."
+  residual_risks:
+    - "Actual deployment may reveal context-specific risks not covered by the documentation-only example."
+    - "Tool-specific permissions require review by the system owner."
+    - "Verification must be repeated in an authorized test or staging environment before production use."
+  final_status: "review_required"
 
 human_review:
-required: true
-review_gate: "before_deployment"
-reason: "The repair loop affects tool permissions, autonomous execution, and deployment readiness."
-reviewer_role: "security reviewer or system owner"
+  required: true
+  review_gate: "before_deployment"
+  reason: "The repair loop affects tool permissions, autonomous execution, and deployment readiness."
+  reviewer_role: "security reviewer or system owner"
+
