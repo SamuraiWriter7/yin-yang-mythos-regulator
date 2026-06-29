@@ -3,13 +3,24 @@ orchestration_id: "multi-wing-defensive-orchestration-v0-5"
 created_at: "2026-06-29T00:00:00Z"
 
 safety_boundary:
-  status: "review_required"
-  notes: "Boundary review required before completion."
+  prohibited_outputs:
+    - "exploit_execution_steps"
+    - "malicious_code"
+    - "credential_theft"
+    - "real_target_attack_instructions"
+  required_safeguards:
+    - "trace_required"
+    - "human_review_required"
+    - "least_privilege_required"
 
 human_review:
-  reviewer_role: "project maintainer or security reviewer"
-  decision_status: "review_required"
-  notes: "Human review required before finalization."
+  required: true
+  review_gate: "human-gate"
+  reason: "Completion, export, and deployment require human approval."
+  review_before:
+    - "external_export"
+    - "deployment"
+    - "permission_expansion"
 
 purpose: "Coordinate defensive AI regulation across multiple specialized wings so that no single wing can complete the loop alone."
 
