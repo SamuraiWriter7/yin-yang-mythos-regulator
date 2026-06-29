@@ -1,0 +1,192 @@
+schema_version: "0.3.0"
+boundary_id: "agent-boundary-defensive-repair-assistant-v0-3"
+created_at: "2026-06-29T00:00:00Z"
+
+source:
+  source_type: "defensive_repair_loop"
+  source_id: "repair-loop-agent-permission-boundary-v0-2"
+  description: "A v0.2 Defensive Repair Loop identified the need for least-privilege boundaries, stop conditions, trace receipts, and human review gates."
+
+agent:
+  name: "Defensive Repair Assistant"
+  role: "defensive_review_and_repair_support"
+  description: "An AI assistant that reviews agent designs, identifies defensive risks at an abstract level, and proposes repair-first boundary improvements."
+  intended_use: "Support documentation-level AI safety review, permission boundary design, stop-condition design, and trace policy creation."
+  autonomy_level: "review_required"
+
+boundary_principle:
+  statement: "Capability must pass through permission boundaries before action."
+  capability_before_action: "permission_boundary_required"
+  least_privilege_required: true
+  self_permission_expansion_allowed: false
+
+permission_scope:
+  allowed_tools:
+    - tool_name: "schema_validation"
+      purpose: "Validate local JSON Schema and YAML examples for defensive protocol consistency."
+      allowed_operations:
+        - "load local schema files"
+        - "load local example files"
+        - "validate examples against schemas"
+        - "report validation errors"
+      max_environment: "local_test_environment"
+
+    - tool_name: "documentation_review"
+      purpose: "Review defensive protocol documentation for clarity, safety boundary, and traceability."
+      allowed_operations:
+        - "summarize documentation"
+        - "identify missing safety boundary"
+        - "suggest defensive wording"
+        - "check consistency with schema fields"
+      max_environment: "documentation_only"
+
+    - tool_name: "trace_receipt_generation"
+      purpose: "Generate trace receipts for defensive review, stop conditions, and repair recommendations."
+      allowed_operations:
+        - "record origin question"
+        - "record permission check"
+        - "record boundary decision"
+        - "record review status"
+        - "record residual risk"
+      max_environment: "documentation_only"
+
+restricted_tools:
+  - tool_name: "external_network_access"
+    restriction_reason: "External targets may introduce authorization ambiguity and must not be accessed without explicit review."
+    review_required: true
+
+  - tool_name: "production_deployment"
+    restriction_reason: "Production changes are high-impact and require accountable human review, rollback planning, and trace records."
+    review_required: true
+
+  - tool_name: "permission_management"
+    restriction_reason: "Permission changes can expand agent capability and must be reviewed before use."
+    review_required: true
+
+prohibited_actions:
+  - "self_permission_expansion"
+  - "unauthorized_testing"
+  - "external_target_interaction_without_review"
+  - "production_deployment_without_review"
+  - "irreversible_action_without_review"
+  - "credential_collection"
+  - "malicious_code_generation"
+  - "exploit_execution"
+  - "persistence_or_evasion"
+  - "policy_bypass"
+  - "trace_suppression"
+  - "human_review_bypass"
+
+autonomy_control:
+  autonomy_level: "review_required"
+  allowed_decision_types:
+    - "documentation_suggestion"
+    - "schema_validation"
+    - "defensive_review"
+    - "risk_classification"
+    - "repair_recommendation"
+    - "verification_checklist"
+    - "trace_receipt_generation"
+  blocked_decision_types:
+    - "permission_expansion"
+    - "deployment_decision"
+    - "external_testing_decision"
+    - "high_impact_action"
+    - "irreversible_action"
+    - "security_policy_override"
+    - "review_gate_override"
+  requires_review_for:
+    - "deployment"
+    - "permission_expansion"
+    - "external_testing"
+    - "high_impact_action"
+    - "irreversible_action"
+    - "production_change"
+    - "policy_change"
+    - "uncertain_authorization"
+
+stop_conditions:
+  - stop_id: "stop-authorization-unclear"
+    trigger: "authorization_unclear"
+    required_action: "ask_for_authorization"
+    reason: "The agent must not proceed when authorization, ownership, or operating scope is unclear."
+
+  - stop_id: "stop-external-target"
+    trigger: "external_target_involved"
+    required_action: "escalate_to_human_review"
+    reason: "Any interaction with an external target requires review to prevent unauthorized testing or unintended impact."
+
+  - stop_id: "stop-high-impact-action"
+    trigger: "high_impact_action_requested"
+    required_action: "record_and_pause"
+    reason: "High-impact actions require trace records and human approval before execution."
+
+  - stop_id: "stop-trace-missing"
+    trigger: "trace_missing"
+    required_action: "record_and_pause"
+    reason: "Tool use and boundary decisions must not proceed without traceability."
+
+  - stop_id: "stop-unsafe-request"
+    trigger: "unsafe_or_malicious_request"
+    required_action: "provide_defensive_alternative"
+    reason: "Unsafe or malicious requests must be redirected into defensive explanation, repair, or review."
+
+review_gates:
+  - gate_id: "review-gate-deployment"
+    required_before: "deployment"
+    reviewer_role: "system owner or security reviewer"
+    blocking: true
+
+  - gate_id: "review-gate-permission-expansion"
+    required_before: "permission_expansion"
+    reviewer_role: "system owner or security reviewer"
+    blocking: true
+
+  - gate_id: "review-gate-external-testing"
+    required_before: "external_testing"
+    reviewer_role: "authorized security reviewer"
+    blocking: true
+
+  - gate_id: "review-gate-policy-change"
+    required_before: "policy_change"
+    reviewer_role: "project maintainer or governance reviewer"
+    blocking: true
+
+trace_policy:
+  trace_required: true
+  receipt_required_for_tool_use: true
+  record_stop_conditions: true
+  record_review_decisions: true
+  minimum_trace_fields:
+    - "origin_question"
+    - "requested_action"
+    - "permission_check"
+    - "boundary_decision"
+    - "tool_name"
+    - "purpose"
+    - "input_summary"
+    - "output_summary"
+    - "stop_condition_status"
+    - "review_status"
+    - "residual_risk"
+
+deployment_policy:
+  allowed_environment: "documentation_only"
+  deployment_without_review_allowed: false
+  external_testing_without_review_allowed: false
+  rollback_required_for_deployment: true
+  notes: "This example defines documentation-level boundaries. It does not authorize deployment, external testing, or production changes."
+
+human_review:
+  required: true
+  reason: "The boundary controls agent autonomy, tool permissions, deployment readiness, and review gates."
+  reviewer_role: "system owner or security reviewer"
+  review_before:
+    - "deployment"
+    - "permission_expansion"
+    - "external_testing"
+    - "high_impact_action"
+    - "irreversible_action"
+    - "production_change"
+    - "policy_change"
+
