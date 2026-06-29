@@ -132,28 +132,28 @@ status: "requires_review"
 
 repair_outputs:
 
-- output_id: "repair-output-least-privilege"
+  output_id: "repair-output-least-privilege"
   output_type: "permission_boundary"
   summary: "Define least-privilege tool scopes before enabling autonomous execution."
   priority: "high"
   minimum_change: true
   verification_required: true
 
-- output_id: "repair-output-stop-conditions"
+  output_id: "repair-output-stop-conditions"
   output_type: "stop_condition"
   summary: "Add stop conditions for uncertainty, missing authorization, high-impact actions, and ambiguous requests."
   priority: "high"
   minimum_change: true
   verification_required: true
 
-- output_id: "repair-output-trace-receipts"
+  output_id: "repair-output-trace-receipts"
   output_type: "trace_requirement"
   summary: "Require a trace receipt for every tool invocation, including purpose, input summary, output summary, and review status."
   priority: "high"
   minimum_change: true
   verification_required: true
 
-- output_id: "repair-output-human-review-gate"
+  output_id: "repair-output-human-review-gate"
   output_type: "human_review_gate"
   summary: "Require human review before deployment, permission expansion, or irreversible actions."
   priority: "critical"
